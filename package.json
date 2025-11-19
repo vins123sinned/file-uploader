@@ -1,0 +1,30 @@
+{
+  "name": "file-uploader",
+  "version": "1.0.0",
+  "description": "A simplistic version of Google Drive where users can share and upload their files",
+  "keywords": [
+    "file",
+    "uploader",
+    "porfolio"
+  ],
+  "homepage": "https://github.com/vins123sinned/file-uploader#readme",
+  "bugs": {
+    "url": "https://github.com/vins123sinned/file-uploader/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vins123sinned/file-uploader.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {}
+}
