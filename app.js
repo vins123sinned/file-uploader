@@ -7,8 +7,6 @@ import { authenticationRouter } from "./routes/authenticationRouter.js";
 
 const app = express();
 
-app.get("/", (req, res) => res.render("basicHomepage"));
-
 // configure views directory and set EJS as the view engine
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
@@ -31,6 +29,7 @@ app.use(passport.session());
 // Parse the urlencoded data sent by the form's POST
 app.use(express.urlencoded({ extended: false }));
 
+app.get("/", (req, res) => res.render("basicHomepage"));
 app.use("/", authenticationRouter);
 
 const PORT = process.env.PORT || 3000;

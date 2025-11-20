@@ -1,13 +1,12 @@
 import { Router } from "express";
+import { getLogIn, getSignUp, postSignUp } from "../controllers/authenticationController.js";
 
 const authenticationRouter = Router();
 
-authenticationRouter.get("/login", (req, res) => {
-  res.render("login");
-});
+authenticationRouter.get("/login", getLogIn);
 
-authenticationRouter.get("/signup", (req, res) => {
-  res.render("signup");
-});
+authenticationRouter.get("/signup", getSignUp);
+
+authenticationRouter.post("/signup", postSignUp);
 
 export { authenticationRouter };
