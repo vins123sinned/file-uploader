@@ -20,6 +20,12 @@ model Session {
   expiresAt DateTime
 }
 
+model User {
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+}
+
 // this will be expanded upon when Supabase is implemented!
 model File {
   id       Int      @id @default(autoincrement())
