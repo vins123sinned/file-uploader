@@ -7,16 +7,22 @@
 </head>
 <body>
   <main>
-    <form>
+    <form action="/signup" method="POST" novalidate>
       <h1>Sign up</h1>
       <section>
         <p>
           <label for="email">Email</label>
-          <input type="text" id="email" name="email" minlength="3" maxlength="254" required>
+          <input type="text" id="email" name="email" minlength="3" maxlength="254" value="<%= locals.previousValues?.email %>" required>
+          <span class="error" role="alert" aria-live="polite">
+            <%= locals.errors?.find((error) => error.path === "email")?.msg %>
+          </span>
         </p>
         <p>
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
+          <input type="password" id="password" name="password" value="<%= locals.previousValues?.password %>" required>
+          <span class="error" role="alert" aria-live="polite">
+            <%= locals.errors?.find((error) => error.path === "password")?.msg %>
+          </span>
         </p>
       </section>
       <section>
