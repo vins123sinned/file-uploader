@@ -10,6 +10,11 @@ const spaceError = "must not include any spaces";
 const passwordError =
   "must have at least 8 characters, one number, and one special character";
 
+const validateLogIn = [
+  body("email").trim().notEmpty().withMessage(`Email ${requiredErr}`),
+  body("password").trim().notEmpty().withMessage(`Password ${requiredErr}`),
+];
+
 const validateSignUp = [
   body("email")
     .trim()
@@ -57,6 +62,24 @@ const getLogIn = (req, res) => {
   res.render("login");
 };
 
+const postLogIn = [
+  validateLogIn,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("login", {
+        previousValues: req.body,
+        errors: errors.array(),
+      });
+    }
+
+    // validate with passport later
+    // this might also be deleted...
+
+    console.log("we good.");
+  },
+];
+
 const getSignUp = (req, res) => {
   res.render("signup");
 };
@@ -82,4 +105,4 @@ const postSignUp = [
   },
 ];
 
-export { getLogIn, getSignUp, postSignUp };
+export { getLogIn, postLogIn, getSignUp, postSignUp };

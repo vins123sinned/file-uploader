@@ -7,16 +7,22 @@
 </head>
 <body>
   <main>
-    <form>
+    <form action="/login" method="POST">
       <h1>Log in</h1>
       <section>
         <p>
           <label for="email">Email</label>
-          <input type="text" id="email" name="email" required autofocus>
+          <input type="text" id="email" name="email" value="<%= locals.previousValues?.email %>" required autofocus>
+          <span class="error" role="alert" aria-live="polite">
+            <%= locals.errors?.find((error) => error.path === "email")?.msg %>
+          </span>
         </p>
         <p>
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
+          <input type="password" id="password" name="password" value="<%= locals.previousValues?.password %>" required>
+          <span class="error" role="alert" aria-live="polite">
+            <%= locals.errors?.find((error) => error.path === "password")?.msg %>
+          </span>
         </p>
       </section>
       <section>
