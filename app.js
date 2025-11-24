@@ -3,7 +3,9 @@ import path from "node:path";
 import express from "express";
 import session from "express-session";
 import passport from "passport";
+import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { authenticationRouter } from "./routes/authenticationRouter.js";
+import { PrismaClient } from "@prisma/client";
 
 const app = express();
 
@@ -17,14 +19,22 @@ app.use(express.static(assetsPath));
 
 // session secret for Passport.js cookies
 // Make sure to add validation!
-/*
-app.use(session({
-  cookie: {
-
-  }
-}));
+app.use(
+  session({
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000, // ms, 1 day
+    },
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true,
+    store: new PrismaSessionStore(new PrismaClient(), {
+      checkPeriod: 2 * 60 * 1000, // ms, 2 minute
+      dbRecordIdIsSessionId: true,
+      dbRecordIdFunction: undefined,
+    }),
+  }),
+);
 app.use(passport.session());
-*/
 
 // Parse the urlencoded data sent by the form's POST
 app.use(express.urlencoded({ extended: false }));

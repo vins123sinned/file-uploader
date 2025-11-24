@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 class User {
   async getUserById(id) {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findUniqueOrThrow({
       where: {
         id: id,
       },

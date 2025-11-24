@@ -1,5 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
-import { getUserByEmail, insertUser } from "../db/queries.js";
+import { userDb } from "../db/User.js";
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -28,7 +28,7 @@ const validateSignUp = [
     .withMessage(`Email ${emailErr}`)
     .bail()
     .custom(async (value) => {
-      const user = await getUserByEmail(value);
+      const user = await userDb.getUserByEmail(value);
 
       if (user) throw new Error("Email already in database");
       return true;
@@ -97,7 +97,7 @@ const postSignUp = [
 
     const { email, password } = matchedData(req);
     try {
-      await insertUser(email, password);
+      await userDb.insertUser(email, password);
       res.redirect("/");
     } catch (err) {
       return next(err);
