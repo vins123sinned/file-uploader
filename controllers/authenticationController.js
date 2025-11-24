@@ -1,4 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
+import { getUserByEmail, insertUser } from "../db/queries.js";
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -22,13 +23,9 @@ const validateSignUp = [
     .withMessage(`Email ${emailErr}`)
     .bail()
     .custom(async (value) => {
-      // const email = await (CHECK IF EMAIL EXISTS IN DATABASE ALREADY)
-      const email = false;
+      const user = await getUserByEmail(value);
 
-      if (email) {
-        throw new Error("Email already in database");
-      }
-
+      if (user) throw new Error("Email already in database");
       return true;
     })
     .withMessage(`Email ${inUseErr}`),
@@ -40,10 +37,7 @@ const validateSignUp = [
     .custom((value) => {
       const spaceRegex = /\s/;
 
-      if (spaceRegex.test(value)) {
-        throw new Error("Password contains spaces");
-      }
-
+      if (spaceRegex.test(value)) throw new Error("Password contains spaces");
       return true;
     })
     .withMessage(`Password ${spaceError}`)
@@ -52,18 +46,12 @@ const validateSignUp = [
       // at least 8 characters, one number, and one non-alphanumeric (NO SPACES!)
       const regex = /^(?=.*\d)(?=.*[^\w\s])[^\s]{8,}$/;
 
-      if (!regex.test(value)) {
+      if (!regex.test(value))
         throw new Error("Password does not pass the constraints");
-      }
-
       return true;
     })
     .withMessage(`Password ${passwordError}`),
 ];
-
-const requiredErr = "is required"
-const lengthErr = (minLength, maxLength) => `must be between ${minLength} and ${maxLength} characters`
-const emailErr = "must be a valid email address"
 
 const getLogIn = (req, res) => {
   res.render("login");
@@ -75,7 +63,7 @@ const getSignUp = (req, res) => {
 
 const postSignUp = [
   validateSignUp,
-  (req, res) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).render("signup", {
@@ -85,9 +73,12 @@ const postSignUp = [
     }
 
     const { email, password } = matchedData(req);
-    console.log("Gucci.");
-    // add to prisma
-    res.redirect("/");
+    try {
+      await insertUser(email, password);
+      res.redirect("/");
+    } catch (err) {
+      return next(err);
+    }
   },
 ];
 
