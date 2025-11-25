@@ -6,6 +6,7 @@ import {
   getSignUp,
   postLogIn,
   postSignUp,
+  getLogOut,
 } from "../controllers/authenticationController.js";
 import { userDb } from "../db/User.js";
 
@@ -53,5 +54,7 @@ authenticationRouter.post("/login", postLogIn);
 authenticationRouter.get("/signup", getSignUp);
 
 authenticationRouter.post("/signup", postSignUp);
+
+authenticationRouter.get("/logout", getLogOut);
 
 export { authenticationRouter };

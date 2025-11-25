@@ -11,11 +11,6 @@ const spaceError = "must not include any spaces";
 const passwordError =
   "must have at least 8 characters, one number, and one special character";
 
-const validateLogIn = [
-  body("email").trim().notEmpty().withMessage(`Email ${requiredErr}`),
-  body("password").trim().notEmpty().withMessage(`Password ${requiredErr}`),
-];
-
 const validateSignUp = [
   body("email")
     .trim()
@@ -116,4 +111,11 @@ const postSignUp = [
   },
 ];
 
-export { getLogIn, postLogIn, getSignUp, postSignUp };
+const getLogOut = (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+};
+
+export { getLogIn, postLogIn, getSignUp, postSignUp, getLogOut };
