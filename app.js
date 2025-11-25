@@ -38,6 +38,12 @@ app.use(passport.session());
 // Parse the urlencoded data sent by the form's POST
 app.use(express.urlencoded({ extended: false }));
 
+// pass the user to all views
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.get("/", (req, res) => res.render("basicHomepage"));
 app.use("/", authenticationRouter);
 
