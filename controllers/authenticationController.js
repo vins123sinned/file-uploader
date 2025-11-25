@@ -1,5 +1,6 @@
 import { body, validationResult, matchedData } from "express-validator";
 import { userDb } from "../db/User.js";
+import passport from "passport";
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -62,23 +63,33 @@ const getLogIn = (req, res) => {
   res.render("login");
 };
 
-const postLogIn = [
-  validateLogIn,
-  async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+const postLogIn = (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+
+    if (!user) {
       return res.status(400).render("login", {
         previousValues: req.body,
-        errors: errors.array(),
+        errors: [
+          {
+            path: "authentication",
+            msg: "The username or password is incorrect",
+          },
+        ],
       });
     }
 
-    // validate with passport later
-    // this might also be deleted...
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      return res.redirect("/");
+    });
+  })(req, res, next);
+};
 
-    console.log("we good.");
-  },
-];
+passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+});
 
 const getSignUp = (req, res) => {
   res.render("signup");

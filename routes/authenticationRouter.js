@@ -48,13 +48,7 @@ const authenticationRouter = Router();
 
 authenticationRouter.get("/login", getLogIn);
 
-authenticationRouter.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/success",
-    failureRedirect: "/failure",
-  }),
-);
+authenticationRouter.post("/login", postLogIn);
 
 authenticationRouter.get("/signup", getSignUp);
 

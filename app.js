@@ -17,8 +17,7 @@ app.set("view engine", "ejs");
 const assetsPath = path.join(import.meta.dirname, "public");
 app.use(express.static(assetsPath));
 
-// session secret for Passport.js cookies
-// Make sure to add validation!
+// session store for Passport.js
 app.use(
   session({
     cookie: {
