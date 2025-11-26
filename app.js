@@ -4,8 +4,9 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
-import { authenticationRouter } from "./routes/authenticationRouter.js";
 import { PrismaClient } from "@prisma/client";
+import { authenticationRouter } from "./routes/authenticationRouter.js";
+import { fileRouter } from "./routes/fileRouter.js";
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => res.render("basicHomepage"));
 app.use("/", authenticationRouter);
+app.use("/files", fileRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT || 3000, (err) => {

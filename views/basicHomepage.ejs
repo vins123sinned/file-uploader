@@ -11,8 +11,8 @@
       <a href="/login">Log In NOW!</a>
       <a href="/signup">Or sign up please ❤️</a>
     <% } else { %>
-      <% console.log(currentUser) %>
       <h1>Welcome, <%= currentUser.email %></h1>
+      <a href="/files/upload">Upload file</a>
       <a href="/logout">Log out</a>
     <% } %>
 </body>
