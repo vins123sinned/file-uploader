@@ -1,6 +1,7 @@
+import bcrypt from "bcryptjs";
+import passport from "passport";
 import { body, validationResult, matchedData } from "express-validator";
 import { userDb } from "../db/User.js";
-import passport from "passport";
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -102,8 +103,9 @@ const postSignUp = [
     }
 
     const { email, password } = matchedData(req);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     try {
-      await userDb.insertUser(email, password);
+      await userDb.insertUser(email, hashedPassword);
       res.redirect("/");
     } catch (err) {
       return next(err);

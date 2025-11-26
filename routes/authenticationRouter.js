@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Router } from "express";
@@ -21,8 +22,10 @@ passport.use(
         const user = await userDb.getUserByEmail(username);
 
         if (!user) return done(null, false, { message: "Incorrect email" });
-        if (user.password !== password)
-          return done(null, false, { message: "Incorrect password" });
+
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) return done(null, false, { message: "Incorrect password" });
+
         return done(null, user);
       } catch (err) {
         return done(err);
