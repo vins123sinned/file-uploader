@@ -1,0 +1,12 @@
+<form action="/files/upload" method="POST" enctype="multipart/form-data">
+  <h1>Upload file</h1>
+  <section>
+    <label for="restaurant">Restaurant</label>
+    <input type="text" name="restaurant" id="restaurant" maxlength="64" required>
+    <label for="images">Files:</label>
+    <input type="file" name="images" id="images" multiple="true">
+  </section>
+  <section>
+    <button type="submit">Upload</button>
+  </section>
+</form>

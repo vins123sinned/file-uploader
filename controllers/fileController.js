@@ -1,5 +1,8 @@
+import multer from "multer";
+
 const getFileForm = (req, res) => {
-  res.send("Here's your form sir/ma'am");
+  if (!res.locals.currentUser) return res.redirect("/login");
+  res.render("uploadForm");
 };
 
 export { getFileForm };
