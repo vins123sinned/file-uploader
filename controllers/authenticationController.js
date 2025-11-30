@@ -2,10 +2,8 @@ import bcrypt from "bcryptjs";
 import passport from "passport";
 import { body, validationResult, matchedData } from "express-validator";
 import { userDb } from "../db/User.js";
+import { requiredErr, lengthErr } from "../utils.js";
 
-const requiredErr = "is required";
-const lengthErr = (minLength, maxLength) =>
-  `must be between ${minLength} and ${maxLength} characters`;
 const emailErr = "must be a valid email address";
 const inUseErr = "is already registered";
 const spaceError = "must not include any spaces";
@@ -103,7 +101,7 @@ const postSignUp = [
     }
 
     const { email, password } = matchedData(req);
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     try {
       await userDb.insertUser(email, hashedPassword);
       res.redirect("/");
