@@ -51,13 +51,9 @@ passport.deserializeUser(async (id, done) => {
 const authenticationRouter = Router();
 
 authenticationRouter.get("/login", getLogIn);
-
 authenticationRouter.post("/login", postLogIn);
-
 authenticationRouter.get("/signup", getSignUp);
-
 authenticationRouter.post("/signup", postSignUp);
-
 authenticationRouter.get("/logout", getLogOut);
 
 export { authenticationRouter };

@@ -9,7 +9,6 @@ const upload = multer({ storage: storage });
 const fileRouter = Router();
 
 fileRouter.get("/upload", getFileForm);
-
 fileRouter.post("/upload", upload.any(), postFileForm);
 
 export { fileRouter };
