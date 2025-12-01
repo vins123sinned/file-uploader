@@ -1,4 +1,13 @@
-<form action="/files/upload" method="POST" enctype="multipart/form-data" novalidate>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add a file</title>
+  <script src="/js/uploadForm.js" defer></script>
+</head>
+<body>
+  <form action="/files/upload" method="POST" enctype="multipart/form-data" novalidate>
   <h1>Upload file</h1>
   <section>
     <p>
@@ -11,6 +20,9 @@
     <p>
       <label for="images">Files:</label>
       <input type="file" name="images" id="images" multiple="true" required>
+      <span class="files-counter">
+        <span class="file-count">0</span>/8 files
+      </span>
       <span class="error" role="alert" aria-live="polite">
         <%= locals.errors?.find((error) => error.path === "images")?.msg %>
       </span>
@@ -20,3 +32,5 @@
     <button type="submit">Upload</button>
   </section>
 </form>
+</body>
+</html>
