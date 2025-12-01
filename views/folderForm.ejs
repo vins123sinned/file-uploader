@@ -6,12 +6,15 @@
   <title>Create a folder</title>
 </head>
 <body>
-  <form>
+  <form action="/folders/create" method="POST">
     <h1>Create a folder</h1>
     <section>
       <p>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" maxlength="256" required>
+        <input type="text" name="name" id="name" maxlength="256" value="<%= locals.previousValues?.name %>" required>
+        <span class="error" role="alert" aria-live="polite">
+          <%= locals.errors?.find((error) => error.path === "name")?.msg %>
+        </span>
       </p>
     </section>
     <section>
