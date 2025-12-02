@@ -1,5 +1,6 @@
 import { body, validationResult, matchedData } from "express-validator";
 import { requiredErr, lengthErr } from "../utils.js";
+import { folderDb } from "../db/Folder.js";
 
 const validateFolderForm = [
   body("name")
@@ -18,17 +19,22 @@ const getFolderForm = (req, res) => {
 
 const postFolderForm = [
   validateFolderForm,
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).render("folderForm", {
+      return res.status(400).render("folderForm", {
         previousValues: req.body,
         errors: errors.array(),
       });
     }
 
-    const { name } = matchedData;
-    // push to database!
+    const { name } = matchedData(req);
+    try {
+      await folderDb.insertFolder(name);
+      res.redirect("/");
+    } catch (err) {
+      return next(err);
+    }
   },
 ];
 
