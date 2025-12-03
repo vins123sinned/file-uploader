@@ -12,6 +12,14 @@ const validateFolderForm = [
     .withMessage(`Name ${lengthErr(1, 256)}`),
 ];
 
+const getAllFolders = async (req, res) => {
+  const folders = await folderDb.getAllFolders();
+
+  res.render("folderList", {
+    folders: folders,
+  });
+};
+
 const getFolderForm = (req, res) => {
   if (!res.locals.currentUser) return res.redirect("login");
   res.render("folderForm");
@@ -38,4 +46,4 @@ const postFolderForm = [
   },
 ];
 
-export { getFolderForm, postFolderForm };
+export { getAllFolders, getFolderForm, postFolderForm };
