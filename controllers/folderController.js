@@ -20,6 +20,15 @@ const getAllFolders = async (req, res) => {
   });
 };
 
+const getFolder = async (req, res) => {
+  const { folderId } = req.params;
+  const folder = await folderDb.getFolder(Number(folderId));
+
+  res.render("folderDetail", {
+    folder: folder,
+  });
+};
+
 const getFolderForm = (req, res) => {
   if (!res.locals.currentUser) return res.redirect("login");
   res.render("folderForm");
@@ -46,4 +55,4 @@ const postFolderForm = [
   },
 ];
 
-export { getAllFolders, getFolderForm, postFolderForm };
+export { getAllFolders, getFolder, getFolderForm, postFolderForm };
