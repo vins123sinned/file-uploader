@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create a folder</title>
+  <title><%= title %></title>
 </head>
 <body>
-  <form action="/folders/create" method="POST">
-    <h1>Create a folder</h1>
+  <form action="<%= action %>" method="POST" novalidate>
+    <h1><%= title %></h1>
     <section>
       <p>
         <label for="name">Name</label>

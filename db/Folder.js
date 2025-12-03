@@ -12,7 +12,7 @@ class Folder {
   async getFolder(folderId) {
     const folder = await prisma.folder.findUnique({
       where: {
-        id: folderId,
+        id: Number(folderId),
       },
     });
 
@@ -22,6 +22,17 @@ class Folder {
   async insertFolder(name) {
     // later on double check if files really are related!
     await prisma.folder.create({
+      data: {
+        name: name,
+      },
+    });
+  }
+
+  async updateFolder(folderId, name) {
+    await prisma.folder.update({
+      where: {
+        id: Number(folderId),
+      },
       data: {
         name: name,
       },
