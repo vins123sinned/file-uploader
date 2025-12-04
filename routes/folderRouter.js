@@ -4,6 +4,7 @@ import {
   getFolder,
   getFolderForm,
   getUpdateForm,
+  postDeleteFolder,
   postFolderForm,
   postUpdateForm,
 } from "../controllers/folderController.js";
@@ -15,7 +16,8 @@ folderRouter.get("/", getAllFolders);
 folderRouter.get("/create", checkUser, getFolderForm);
 folderRouter.post("/create", checkUser, postFolderForm);
 folderRouter.get("/update/:folderId", checkUser, getUpdateForm);
-folderRouter.post("/update/:folderId", postUpdateForm);
+folderRouter.post("/update/:folderId", checkUser, postUpdateForm);
+folderRouter.post("/delete/:folderId", checkUser, postDeleteFolder);
 folderRouter.get("/:folderId", getFolder);
 
 export { folderRouter };

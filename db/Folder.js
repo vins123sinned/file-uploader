@@ -38,6 +38,14 @@ class Folder {
       },
     });
   }
+
+  async deleteFolder(folderId) {
+    await prisma.folder.delete({
+      where: {
+        id: Number(folderId),
+      },
+    });
+  }
 }
 
 export const folderDb = new Folder();

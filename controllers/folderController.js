@@ -95,6 +95,17 @@ const postUpdateForm = [
   },
 ];
 
+const postDeleteFolder = async (req, res, next) => {
+  const { folderId } = req.params;
+
+  try {
+    await folderDb.deleteFolder(folderId);
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export {
   getAllFolders,
   getFolder,
@@ -102,4 +113,5 @@ export {
   postFolderForm,
   getUpdateForm,
   postUpdateForm,
+  postDeleteFolder,
 };
