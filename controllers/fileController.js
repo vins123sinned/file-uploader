@@ -1,5 +1,6 @@
 import { body, validationResult, matchedData } from "express-validator";
 import { requiredErr, lengthErr } from "../utils.js";
+import { fileDb } from "../db/File.js";
 
 const validateFileForm = [
   body("name")
@@ -26,6 +27,15 @@ const validateFileForm = [
     .withMessage("There must no more than 8 images selected"),
 ];
 
+const getAllFiles = async (req, res) => {
+  const files = await fileDb.getAllFiles();
+
+  res.render("list", {
+    subject: "files",
+    items: files,
+  });
+};
+
 const getFileForm = (req, res) => {
   if (!res.locals.currentUser) return res.redirect("/login");
   res.render("uploadForm");
@@ -33,7 +43,7 @@ const getFileForm = (req, res) => {
 
 const postFileForm = [
   validateFileForm,
-  (req, res, next) => {
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).render("uploadForm", {
@@ -43,8 +53,14 @@ const postFileForm = [
     }
 
     // finish once Supabase is implemented!
-    res.send("Done!");
+    const { name } = matchedData(req);
+    try {
+      await fileDb.insertFile(name);
+      res.redirect("/");
+    } catch (err) {
+      return next(err);
+    }
   },
 ];
 
-export { getFileForm, postFileForm };
+export { getAllFiles, getFileForm, postFileForm };
