@@ -5,7 +5,7 @@ deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
     if (deleteForm.classList.contains("hidden")) {
       console.log(deleteButton);
-      const actionLink = `/folders/delete/${deleteButton.dataset.id}`;
+      const actionLink = `/${deleteButton.dataset.subject}/delete/${deleteButton.dataset.id}`;
 
       deleteForm.setAttribute("action", actionLink);
       deleteForm.classList.remove("hidden");

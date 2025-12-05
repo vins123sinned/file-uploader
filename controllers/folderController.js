@@ -15,8 +15,9 @@ const validateFolderForm = [
 const getAllFolders = async (req, res) => {
   const folders = await folderDb.getAllFolders();
 
-  res.render("folderList", {
-    folders: folders,
+  res.render("list", {
+    subject: "folders",
+    items: folders,
   });
 };
 

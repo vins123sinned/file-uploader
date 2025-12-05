@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All folders</title>
-  <link rel="stylesheet" href="/css/folderList.css">
+  <title>All <%=subject%></title>
+  <link rel="stylesheet" href="/css/list.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete,edit" />
-  <script src="/js/folderList.js" defer></script>
+  <script src="/js/list.js" defer></script>
 </head>
 <body>
-  <% if (folders.length > 0) { %>
+  <% if (items.length > 0) { %>
     <ul>
-      <% folders.forEach((folder) => { %>
+      <% items.forEach((item) => { %>
         <li>
-          <a href="/folders/<%=folder.id%>"><%= folder.name %></a>
-          <a href="/folders/update/<%=folder.id%>">
+          <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
+          <a href="/<%=subject%>/update/<%=item.id%>">
             <span class="material-symbols-outlined">
               edit
             </span>
           </a>
-          <button type="button" class="delete-button" data-id="<%=folder.id%>">
+          <button type="button" class="delete-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
             <span class="material-symbols-outlined">
               delete
             </span>
@@ -29,9 +29,9 @@
     </ul>
   <% } else { %>
     <p>
-      No folders yet!
-      <a href="/folders/create">
-        Create folder
+      No <%=subject%> yet!
+      <a href="/<%=subject%>/create">
+        Add one today!
       </a>
     </p>
   <% } %>
