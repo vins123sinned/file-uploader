@@ -51,7 +51,7 @@ const postFolderForm = [
     const { name } = matchedData(req);
     try {
       await folderDb.insertFolder(name);
-      res.redirect("/");
+      res.redirect("/folders");
     } catch (err) {
       return next(err);
     }
@@ -89,7 +89,7 @@ const postUpdateForm = [
     const { name } = matchedData(req);
     try {
       await folderDb.updateFolder(folderId, name);
-      res.redirect("/");
+      res.redirect("/folders");
     } catch (err) {
       return next(err);
     }
@@ -101,7 +101,7 @@ const postDeleteFolder = async (req, res, next) => {
 
   try {
     await folderDb.deleteFolder(folderId);
-    res.redirect("/");
+    res.redirect("/folders");
   } catch (err) {
     return next(err);
   }

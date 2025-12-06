@@ -27,6 +27,14 @@ class File {
       },
     });
   }
+
+  async deleteFile(fileId) {
+    await prisma.file.delete({
+      where: {
+        id: Number(fileId),
+      },
+    });
+  }
 }
 
 export const fileDb = new File();

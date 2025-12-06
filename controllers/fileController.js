@@ -56,11 +56,22 @@ const postFileForm = [
     const { name } = matchedData(req);
     try {
       await fileDb.insertFile(name);
-      res.redirect("/");
+      res.redirect("/files");
     } catch (err) {
       return next(err);
     }
   },
 ];
 
-export { getAllFiles, getFileForm, postFileForm };
+const postDeleteFile = async (req, res, next) => {
+  const { fileId } = req.params;
+
+  try {
+    await fileDb.deleteFile(fileId);
+    res.redirect("/files");
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export { getAllFiles, getFileForm, postFileForm, postDeleteFile };

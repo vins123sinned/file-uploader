@@ -14,11 +14,13 @@
       <% items.forEach((item) => { %>
         <li>
           <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
-          <a href="/<%=subject%>/update/<%=item.id%>">
-            <span class="material-symbols-outlined">
-              edit
-            </span>
-          </a>
+          <% if (subject === "folders") { %>
+            <a href="/<%=subject%>/update/<%=item.id%>">
+              <span class="material-symbols-outlined">
+                edit
+              </span>
+            </a>
+          <% } %>
           <button type="button" class="delete-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
             <span class="material-symbols-outlined">
               delete
@@ -26,6 +28,11 @@
           </button>
         </li>
       <% }) %>
+      <li>
+        <a href="/<%=subject%>/create">
+          Add
+        </a>
+      </li>
     </ul>
   <% } else { %>
     <p>
