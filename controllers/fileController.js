@@ -36,6 +36,15 @@ const getAllFiles = async (req, res) => {
   });
 };
 
+const getFile = async (req, res) => {
+  const { fileId } = req.params;
+  const file = await fileDb.getFile(fileId);
+
+  res.render("fileDetail", {
+    file: file,
+  });
+};
+
 const getFileForm = (req, res) => {
   if (!res.locals.currentUser) return res.redirect("/login");
   res.render("uploadForm");
@@ -74,4 +83,4 @@ const postDeleteFile = async (req, res, next) => {
   }
 };
 
-export { getAllFiles, getFileForm, postFileForm, postDeleteFile };
+export { getAllFiles, getFile, getFileForm, postFileForm, postDeleteFile };

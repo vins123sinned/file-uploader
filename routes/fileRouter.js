@@ -2,6 +2,7 @@ import multer from "multer";
 import { Router } from "express";
 import {
   getAllFiles,
+  getFile,
   getFileForm,
   postDeleteFile,
   postFileForm,
@@ -18,5 +19,6 @@ fileRouter.get("/", getAllFiles);
 fileRouter.get("/create", checkUser, getFileForm);
 fileRouter.post("/create", [checkUser, upload.any()], postFileForm);
 fileRouter.post("/delete/:fileId", checkUser, postDeleteFile);
+fileRouter.get("/:fileId", getFile);
 
 export { fileRouter };

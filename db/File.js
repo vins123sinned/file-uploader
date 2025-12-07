@@ -12,7 +12,7 @@ class File {
   async getFile(fileId) {
     const file = await prisma.file.findUnique({
       where: {
-        id: fileId,
+        id: Number(fileId),
       },
     });
 
