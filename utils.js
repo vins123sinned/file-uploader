@@ -6,7 +6,7 @@ const lengthErr = (minLength, maxLength) =>
 const checkUser = (req, res, next) => {
   console.log("HEY!");
   if (!res.locals.currentUser) {
-    return res.redirect("login");
+    return res.redirect("/login");
   } else {
     next();
   }
