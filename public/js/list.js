@@ -4,7 +4,6 @@ const deleteForm = document.querySelector(".delete-form");
 deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
     if (deleteForm.classList.contains("hidden")) {
-      console.log(deleteButton);
       const actionLink = `/${deleteButton.dataset.subject}/delete/${deleteButton.dataset.id}`;
 
       deleteForm.setAttribute("action", actionLink);

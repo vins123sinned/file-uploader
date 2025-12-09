@@ -1,5 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
-import { requiredErr, lengthErr } from "../utils.js";
+import { requiredErr, lengthErr, uploadFiles } from "../utils.js";
 import { fileDb } from "../db/File.js";
 
 const validateFileForm = [
@@ -61,9 +61,13 @@ const postFileForm = [
       });
     }
 
-    // finish once Supabase is implemented!
     const { name } = matchedData(req);
+
+    // UPDATE TO ALLOW FOR VARIABLE AMOUNTS OF FILES
     try {
+      const fileUrls = await uploadFiles(req.files, next);
+
+      // UPDATE UPDATE UPDATE
       await fileDb.insertFile(name);
       res.redirect("/files");
     } catch (err) {
