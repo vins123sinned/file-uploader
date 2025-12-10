@@ -1,5 +1,6 @@
 import { supabase } from "./db/clients.js";
 import { decode } from "base64-arraybuffer";
+import { fileDb } from "./db/File.js";
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -14,14 +15,13 @@ const checkUser = (req, res, next) => {
   }
 };
 
-// upload all files to multer, returning the url strings
-const uploadFiles = async (files, next) => {
-  await Promise.all(
+// upload all files to multer, returning the ids of the files
+const uploadFiles = async (files) => {
+  const links = await Promise.all(
     files.map(async (file) => {
-      // decodes base64 string to ArrayBuffer
+      // decodes base64 string to ArrayBuffer for supabase .upload()
       const fileBase64 = decode(file.buffer.toString("base64"));
 
-      // upload file to supabase
       try {
         const { data, error } = await supabase.storage
           .from("image")
@@ -29,14 +29,27 @@ const uploadFiles = async (files, next) => {
             contentType: file.mimetype,
           });
 
-        // moves to catch block
         if (error) throw error;
+
+        // return url
+        const { data: image } = supabase.storage
+          .from("image")
+          .getPublicUrl(file.originalname);
+
+        const insertedFile = await fileDb.insertFile(
+          file.originalname,
+          file.size,
+          image.publicUrl,
+        );
+
+        return insertedFile.id;
       } catch (err) {
-        // quit this code and jump straight to error handling
         throw new Error(err);
       }
     }),
   );
+
+  console.log(links);
 };
 
 export { requiredErr, lengthErr, checkUser, uploadFiles };

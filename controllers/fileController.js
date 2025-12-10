@@ -65,10 +65,9 @@ const postFileForm = [
 
     // UPDATE TO ALLOW FOR VARIABLE AMOUNTS OF FILES
     try {
-      const fileUrls = await uploadFiles(req.files, next);
+      const fileIds = await uploadFiles(req.files);
 
       // UPDATE UPDATE UPDATE
-      await fileDb.insertFile(name);
       res.redirect("/files");
     } catch (err) {
       return next(err);

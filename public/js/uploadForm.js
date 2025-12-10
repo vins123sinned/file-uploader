@@ -1,7 +1,7 @@
 const fileInput = document.querySelector("#images");
 const fileCountSpan = document.querySelector(".file-count");
 
-fileInput.addEventListener("change", (event) => {
+const updateFileCount = () => {
   const fileCount = fileInput.files.length;
 
   if (fileCount > 8) {
@@ -10,4 +10,9 @@ fileInput.addEventListener("change", (event) => {
     fileCountSpan.classList.remove("invalid");
   }
   fileCountSpan.textContent = fileCount;
-});
+};
+
+fileInput.addEventListener("change", updateFileCount);
+
+// initial file count for page refreshes
+updateFileCount();

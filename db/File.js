@@ -17,13 +17,16 @@ class File {
     return file;
   }
 
-  async insertFile(name) {
-    await prisma.file.create({
+  async insertFile(name, size, url) {
+    const file = await prisma.file.create({
       data: {
         name: name,
-        size: 0, // ADD THIS WHEN SUPABASE IS IMPLEMENTED!
+        size: size,
+        url: url,
       },
     });
+
+    return file;
   }
 
   async deleteFile(fileId) {
