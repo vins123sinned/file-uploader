@@ -27,19 +27,27 @@ model User {
   password String
 }
 
+model Post {
+  id       Int     @id @default(autoincrement())
+  name     String
+  files    File[]
+  folder   Folder? @relation(fields: [folderId], references: [id])
+  folderId Int?
+}
+
 // this will be expanded upon when Supabase is implemented!
 model File {
-  id       Int      @id @default(autoincrement())
-  name     String
-  url      String
-  date     DateTime @default(now())
-  size     Int // In bytes, up to 2147483647 or 2.147483647 GBs (We only use max 1MB!)
-  folder   Folder?  @relation(fields: [folderId], references: [id])
-  folderId Int?
+  id     Int      @id @default(autoincrement())
+  name   String
+  url    String
+  date   DateTime @default(now())
+  size   Int // In bytes, up to 2147483647 or 2.147483647 GBs (We only use max 1MB!)
+  post   Post?    @relation(fields: [postId], references: [id])
+  postId Int?
 }
 
 model Folder {
   id    Int    @id @default(autoincrement())
   name  String
-  files File[]
+  posts Post[]
 }
