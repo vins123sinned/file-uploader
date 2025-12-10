@@ -28,10 +28,11 @@ model User {
 }
 
 model Post {
-  id       Int     @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   name     String
+  date     DateTime @default(now())
   files    File[]
-  folder   Folder? @relation(fields: [folderId], references: [id])
+  folder   Folder?  @relation(fields: [folderId], references: [id])
   folderId Int?
 }
 
