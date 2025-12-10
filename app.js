@@ -8,6 +8,7 @@ import { PrismaClient } from "@prisma/client";
 import { authenticationRouter } from "./routes/authenticationRouter.js";
 import { fileRouter } from "./routes/fileRouter.js";
 import { folderRouter } from "./routes/folderRouter.js";
+import { postRouter } from "./routes/postRouter.js";
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.get("/", (req, res) => res.render("basicHomepage"));
 app.use("/", authenticationRouter);
 app.use("/files", fileRouter);
 app.use("/folders", folderRouter);
+app.use("/posts", postRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT || 3000, (err) => {
