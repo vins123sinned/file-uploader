@@ -12,18 +12,21 @@ class Post {
       where: {
         id: Number(postId),
       },
+      include: {
+        files: true,
+      },
     });
 
     return post;
   }
 
   async insertPost(name, fileIds) {
-    const post = await prisma.post.create({
+    await prisma.post.create({
       data: {
         name: name,
         files: {
           connect: fileIds,
-        }, // double check if this works!
+        },
       },
     });
   }

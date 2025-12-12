@@ -1,5 +1,10 @@
 import { body, validationResult, matchedData } from "express-validator";
-import { requiredErr, lengthErr, uploadFiles } from "../utils.js";
+import {
+  requiredErr,
+  lengthErr,
+  uploadFiles,
+  deleteAllFiles,
+} from "../utils.js";
 import { postDb } from "../db/Post.js";
 
 const validatePostForm = [
@@ -78,8 +83,8 @@ const postDeletePost = async (req, res, next) => {
   const { postId } = req.params;
 
   try {
+    await deleteAllFiles(postId);
     await postDb.deletePost(postId);
-    await // utils.js delete all files
     res.redirect("/posts");
   } catch (err) {
     return next(err);

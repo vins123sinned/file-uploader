@@ -1,6 +1,7 @@
 import { supabase } from "./db/clients.js";
 import { decode } from "base64-arraybuffer";
 import { fileDb } from "./db/File.js";
+import { postDb } from "./db/Post.js";
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -52,6 +53,28 @@ const uploadFiles = async (files) => {
   return links;
 };
 
-const deleteAllFiles = async (fileIds) => {};
+const deleteAllFiles = async (postId) => {
+  const post = await postDb.getPost(postId);
+  const files = post.files;
 
-export { requiredErr, lengthErr, checkUser, uploadFiles };
+  const filePaths = await Promise.all(
+    files.map(async (file) => {
+      try {
+        await fileDb.deleteFile(file.id);
+        return file.name;
+      } catch (err) {
+        throw new Error(err);
+      }
+    }),
+  );
+
+  const { data, error } = await supabase.storage
+    .from("image")
+    .remove(filePaths);
+
+  if (error) throw error;
+
+  console.log(files);
+};
+
+export { requiredErr, lengthErr, checkUser, uploadFiles, deleteAllFiles };
