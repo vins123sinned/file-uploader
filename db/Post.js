@@ -21,7 +21,9 @@ class Post {
     const post = await prisma.post.create({
       data: {
         name: name,
-        files: fileIds, // double check if this works!
+        files: {
+          connect: fileIds,
+        }, // double check if this works!
       },
     });
   }

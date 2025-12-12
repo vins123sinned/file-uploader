@@ -79,6 +79,7 @@ const postDeletePost = async (req, res, next) => {
 
   try {
     await postDb.deletePost(postId);
+    await // utils.js delete all files
     res.redirect("/posts");
   } catch (err) {
     return next(err);

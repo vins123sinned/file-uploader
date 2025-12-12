@@ -42,14 +42,16 @@ const uploadFiles = async (files) => {
           image.publicUrl,
         );
 
-        return insertedFile.id;
+        return { id: insertedFile.id };
       } catch (err) {
         throw new Error(err);
       }
     }),
   );
 
-  console.log(links);
+  return links;
 };
+
+const deleteAllFiles = async (fileIds) => {};
 
 export { requiredErr, lengthErr, checkUser, uploadFiles };
