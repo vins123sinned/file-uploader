@@ -1,5 +1,3 @@
-import { body, validationResult, matchedData } from "express-validator";
-import { requiredErr, lengthErr, uploadFiles } from "../utils.js";
 import { fileDb } from "../db/File.js";
 
 const getAllFiles = async (req, res) => {

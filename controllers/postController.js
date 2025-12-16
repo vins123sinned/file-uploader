@@ -6,6 +6,7 @@ import {
   deleteAllFiles,
 } from "../utils.js";
 import { postDb } from "../db/Post.js";
+import { folderDb } from "../db/Folder.js";
 
 const validatePostForm = [
   body("name")
@@ -50,9 +51,13 @@ const getPost = async (req, res) => {
   });
 };
 
-const getPostForm = (req, res) => {
+const getPostForm = async (req, res) => {
   if (!res.locals.currentUser) return res.redirect("/login");
-  res.render("uploadForm");
+  const folders = await folderDb.getAllFolders();
+
+  res.render("uploadForm", {
+    folders: folders,
+  });
 };
 
 const postPostForm = [
@@ -60,9 +65,12 @@ const postPostForm = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      const folders = await folderDb.getAllFolders();
+
       return res.status(400).render("uploadForm", {
         previousValues: req.body,
         errors: errors.array(),
+        folders: folders,
       });
     }
 

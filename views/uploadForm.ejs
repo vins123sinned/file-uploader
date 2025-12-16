@@ -27,6 +27,15 @@
         <%= locals.errors?.find((error) => error.path === "images")?.msg %>
       </span>
     </p>
+    <p>
+      <label>Folder</label>
+      <select name="folders" id="folder-select">
+        <option value="">-- None --</option>
+        <% folders.forEach((folder) => { %>
+          <option value="<%=folder.id%>"><%=folder.name%></option>
+        <% }) %>
+      </select>
+    </p>
   </section>
   <section>
     <button type="submit">Upload</button>
