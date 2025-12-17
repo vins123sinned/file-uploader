@@ -23,10 +23,12 @@ const getAllFolders = async (req, res) => {
 
 const getFolder = async (req, res) => {
   const { folderId } = req.params;
-  const folder = await folderDb.getFolder(Number(folderId));
+  const folder = await folderDb.getFolder(folderId);
+  const posts = await folderDb.getAllPosts(folderId);
 
   res.render("folderDetail", {
     folder: folder,
+    posts: posts,
   });
 };
 

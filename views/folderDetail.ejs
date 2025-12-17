@@ -7,6 +7,8 @@
 </head>
 <body>
   <h1><%= folder.name %></h1>
-  <p>Here are the folders: (WILL NEED TO COMPLETE SOON)</p>
+  <% posts.forEach((post) => { %>
+    <p><%= post.name %></p>
+  <% }); %>
 </body>
 </html>

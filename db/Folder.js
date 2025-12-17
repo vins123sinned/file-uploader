@@ -17,6 +17,18 @@ class Folder {
     return folder;
   }
 
+  async getAllPosts(folderId) {
+    const posts = await prisma.post.findMany({
+      where: {
+        folderId: {
+          equals: Number(folderId),
+        },
+      },
+    });
+
+    return posts;
+  }
+
   async insertFolder(name) {
     // later on double check if files really are related!
     await prisma.folder.create({
