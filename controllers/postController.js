@@ -31,6 +31,17 @@ const validatePostForm = [
       return true;
     })
     .withMessage("There must no more than 8 images selected"),
+  body("folderId")
+    .custom((value) => {
+      // only allow numbers, as that's what our folder ids are currently!
+      const numRegex = /^[0-9]*$/g;
+
+      if (!value === "" || !numRegex.test(value))
+        throw new Error("Incorrect option value!");
+
+      return true;
+    })
+    .withMessage("The folder selected is invalid"),
 ];
 
 const getAllPosts = async (req, res) => {
@@ -74,12 +85,12 @@ const postPostForm = [
       });
     }
 
-    const { name } = matchedData(req);
+    const { name, folderId } = matchedData(req);
 
     try {
       const fileIds = await uploadFiles(req.files);
 
-      await postDb.insertPost(name, fileIds);
+      await postDb.insertPost(name, fileIds, folderId);
       res.redirect("/posts");
     } catch (err) {
       return next(err);

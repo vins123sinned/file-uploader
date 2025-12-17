@@ -20,13 +20,14 @@ class Post {
     return post;
   }
 
-  async insertPost(name, fileIds) {
+  async insertPost(name, fileIds, folderId) {
     await prisma.post.create({
       data: {
         name: name,
         files: {
           connect: fileIds,
         },
+        folderId: folderId === "" ? null : Number(folderId),
       },
     });
   }

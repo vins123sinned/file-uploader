@@ -29,12 +29,15 @@
     </p>
     <p>
       <label>Folder</label>
-      <select name="folders" id="folder-select">
+      <select name="folderId" id="folder-select">
         <option value="">-- None --</option>
         <% folders.forEach((folder) => { %>
           <option value="<%=folder.id%>"><%=folder.name%></option>
         <% }) %>
       </select>
+      <span class="error" role="alert" aria-live="polite">
+        <%= locals.errors?.find((error) => error.path === "folder")?.msg %>
+      </span>
     </p>
   </section>
   <section>
