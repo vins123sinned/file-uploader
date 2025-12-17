@@ -55,6 +55,17 @@ class Folder {
         id: Number(folderId),
       },
     });
+
+    await prisma.post.updateMany({
+      where: {
+        folderId: {
+          equals: Number(folderId),
+        },
+      },
+      data: {
+        folderId: null,
+      },
+    });
   }
 }
 
