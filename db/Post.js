@@ -38,6 +38,14 @@ class Post {
         id: Number(postId),
       },
     });
+
+    await prisma.file.deleteMany({
+      where: {
+        postId: {
+          equals: Number(postId),
+        },
+      },
+    });
   }
 }
 
