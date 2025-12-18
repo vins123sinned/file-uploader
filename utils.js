@@ -22,11 +22,12 @@ const uploadFiles = async (files) => {
     files.map(async (file) => {
       // decodes base64 string to ArrayBuffer for supabase .upload()
       const fileBase64 = decode(file.buffer.toString("base64"));
+      const filename = crypto.randomUUID();
 
       try {
         const { data, error } = await supabase.storage
           .from("image")
-          .upload(file.originalname, fileBase64, {
+          .upload(filename, fileBase64, {
             contentType: file.mimetype,
           });
 
@@ -35,10 +36,9 @@ const uploadFiles = async (files) => {
         // return url
         const { data: image } = supabase.storage
           .from("image")
-          .getPublicUrl(file.originalname);
+          .getPublicUrl(filename);
 
         const insertedFile = await fileDb.insertFile(
-          file.originalname,
           file.size,
           image.publicUrl,
         );
