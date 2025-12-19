@@ -19,11 +19,11 @@
     </p>
     <p>
       <label for="images">Files</label>
-      <input type="file" name="images" id="images" multiple="true" required>
+      <input type="file" name="images" id="images" multiple="true" accept="image/png, image/jpeg" required>
       <span class="files-counter">
         <span class="file-count">0</span>/8 files
       </span>
-      <span class="error" role="alert" aria-live="polite">
+      <span class="error file-input-error" role="alert" aria-live="polite">
         <%= locals.errors?.find((error) => error.path === "images")?.msg %>
       </span>
     </p>
