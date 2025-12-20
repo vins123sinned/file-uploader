@@ -32,7 +32,9 @@
       <select name="folderId" id="folder-select">
         <option value="">-- None --</option>
         <% folders.forEach((folder) => { %>
-          <option value="<%=folder.id%>"><%=folder.name%></option>
+          <option value="<%=folder.id%>" <%= (locals.previousValues?.folderId === folder.id) ? "selected" : "" %>>
+            <%=folder.name%>
+          </option>
         <% }) %>
       </select>
       <span class="error" role="alert" aria-live="polite">

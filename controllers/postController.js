@@ -63,7 +63,6 @@ const getPost = async (req, res) => {
 };
 
 const getPostForm = async (req, res) => {
-  if (!res.locals.currentUser) return res.redirect("/login");
   const folders = await folderDb.getAllFolders();
 
   res.render("uploadForm", {
@@ -98,6 +97,21 @@ const postPostForm = [
   },
 ];
 
+const getEditForm = async (req, res) => {
+  const { postId } = req.params;
+  const folders = await folderDb.getAllFolders();
+  const post = await postDb.getPost(postId);
+
+  res.render("uploadForm", {
+    folders: folders,
+    previousValues: {
+      name: post.name,
+      images: post.files,
+      folderId: post.folderId,
+    },
+  });
+};
+
 const postDeletePost = async (req, res, next) => {
   const { postId } = req.params;
 
@@ -110,4 +124,11 @@ const postDeletePost = async (req, res, next) => {
   }
 };
 
-export { getAllPosts, getPost, getPostForm, postPostForm, postDeletePost };
+export {
+  getAllPosts,
+  getPost,
+  getPostForm,
+  postPostForm,
+  getEditForm,
+  postDeletePost,
+};

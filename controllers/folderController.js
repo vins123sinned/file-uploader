@@ -60,7 +60,7 @@ const postFolderForm = [
   },
 ];
 
-const getUpdateForm = async (req, res) => {
+const getEditForm = async (req, res) => {
   const { folderId } = req.params;
   const folder = await folderDb.getFolder(folderId);
 
@@ -73,7 +73,7 @@ const getUpdateForm = async (req, res) => {
   });
 };
 
-const postUpdateForm = [
+const postEditForm = [
   validateFolderForm,
   async (req, res, next) => {
     const { folderId } = req.params;
@@ -114,7 +114,7 @@ export {
   getFolder,
   getFolderForm,
   postFolderForm,
-  getUpdateForm,
-  postUpdateForm,
+  getEditForm,
+  postEditForm,
   postDeleteFolder,
 };

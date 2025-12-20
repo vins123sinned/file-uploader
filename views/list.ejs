@@ -14,13 +14,11 @@
       <% items.forEach((item) => { %>
         <li>
           <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
-          <% if (subject === "folders") { %>
-            <a href="/<%=subject%>/update/<%=item.id%>">
-              <span class="material-symbols-outlined">
-                edit
-              </span>
-            </a>
-          <% } %>
+          <a href="/<%=subject%>/edit/<%=item.id%>">
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+          </a>
           <button type="button" class="delete-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
             <span class="material-symbols-outlined">
               delete
