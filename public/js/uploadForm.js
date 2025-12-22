@@ -1,10 +1,27 @@
 const fileInput = document.querySelector("#images");
 const fileInputError = document.querySelector(".file-input-error");
 const fileCountSpan = document.querySelector(".file-count");
+const imagesPreviews = document.querySelector(".images-previews");
+
+const files = [];
 
 function fileChange() {
   checkFileSize();
+  showImagesPreviews();
   updateFileCount();
+  console.log(files);
+}
+
+function showImagesPreviews() {
+  Array.from(fileInput.files).forEach((file) => {
+    const image = document.createElement("img");
+    image.alt = `Preview image of ${file.name}`;
+    image.height = "200";
+    image.src = URL.createObjectURL(file);
+
+    imagesPreviews.appendChild(image);
+    files.push(file);
+  });
 }
 
 function checkFileSize() {
@@ -14,6 +31,10 @@ function checkFileSize() {
       fileInput.value = "";
       fileInputError.classList.add("invalid");
       fileInputError.textContent = "Files must not exceed 1 MB";
+
+      imagesPreviews.replaceChildren();
+      files.length = 0;
+
       return;
     }
   }
@@ -36,4 +57,5 @@ function updateFileCount() {
 fileInput.addEventListener("change", fileChange);
 
 // initial file count for page refreshes
+showImagesPreviews();
 updateFileCount();

@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add a post</title>
+  <title><%= title %></title>
   <script src="/js/uploadForm.js" defer></script>
 </head>
 <body>
   <form action="/posts/create" method="POST" enctype="multipart/form-data" novalidate>
-  <h1>Upload post</h1>
+  <h1><%= title %></h1>
   <section>
     <p>
       <label for="name">Restaurant</label>
@@ -20,6 +20,9 @@
     <p>
       <label for="images">Files</label>
       <input type="file" name="images" id="images" multiple="true" accept="image/png, image/jpeg" required>
+      <span class="images-previews">
+
+      </span>
       <span class="files-counter">
         <span class="file-count">0</span>/8 files
       </span>

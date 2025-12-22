@@ -66,6 +66,7 @@ const getPostForm = async (req, res) => {
   const folders = await folderDb.getAllFolders();
 
   res.render("uploadForm", {
+    title: "Upload post",
     folders: folders,
   });
 };
@@ -78,9 +79,10 @@ const postPostForm = [
       const folders = await folderDb.getAllFolders();
 
       return res.status(400).render("uploadForm", {
+        title: "Upload post",
+        folders: folders,
         previousValues: req.body,
         errors: errors.array(),
-        folders: folders,
       });
     }
 
@@ -103,6 +105,7 @@ const getEditForm = async (req, res) => {
   const post = await postDb.getPost(postId);
 
   res.render("uploadForm", {
+    title: "Upload post",
     folders: folders,
     previousValues: {
       name: post.name,
