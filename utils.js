@@ -1,7 +1,11 @@
+import multer from "multer";
 import { supabase } from "./db/clients.js";
-import { decode } from "base64-arraybuffer";
 import { fileDb } from "./db/File.js";
 import { postDb } from "./db/Post.js";
+
+// use a memory storage since the files will be stored to Supabase
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const requiredErr = "is required";
 const lengthErr = (minLength, maxLength) =>
@@ -16,43 +20,7 @@ const checkUser = (req, res, next) => {
   }
 };
 
-// upload all files to multer, returning the ids of the files
-const uploadFiles = async (files) => {
-  const links = await Promise.all(
-    files.map(async (file) => {
-      // decodes base64 string to ArrayBuffer for supabase .upload()
-      const fileBase64 = decode(file.buffer.toString("base64"));
-      const filename = crypto.randomUUID();
-
-      try {
-        const { data, error } = await supabase.storage
-          .from("image")
-          .upload(filename, fileBase64, {
-            contentType: file.mimetype,
-          });
-
-        if (error) throw error;
-
-        // return url
-        const { data: image } = supabase.storage
-          .from("image")
-          .getPublicUrl(filename);
-
-        const insertedFile = await fileDb.insertFile(
-          file.size,
-          image.publicUrl,
-        );
-
-        return { id: insertedFile.id };
-      } catch (err) {
-        throw new Error(err);
-      }
-    }),
-  );
-
-  return links;
-};
-
+// this could also be made another in fileRouter
 const deleteAllFiles = async (postId) => {
   const post = await postDb.getPost(postId);
   const files = post.files;
@@ -77,4 +45,4 @@ const deleteAllFiles = async (postId) => {
   console.log(files);
 };
 
-export { requiredErr, lengthErr, checkUser, uploadFiles, deleteAllFiles };
+export { upload, requiredErr, lengthErr, checkUser, deleteAllFiles };

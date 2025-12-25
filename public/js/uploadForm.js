@@ -1,5 +1,6 @@
-const fileInput = document.querySelector("#images");
+const fileInput = document.querySelector("#add-images");
 const fileInputError = document.querySelector(".file-input-error");
+const imagesInput = document.querySelector("#image-links");
 const fileCountSpan = document.querySelector(".file-count");
 const imagesPreviews = document.querySelector(".images-previews");
 
@@ -8,7 +9,29 @@ let files = [];
 function fileChange() {
   checkFileSize();
   showImagesPreviews();
+  uploadFiles();
   updateFileCount();
+}
+
+async function uploadFiles(files) {
+  const formData = new FormData();
+  Array.from(fileInput.files).forEach((file) => {
+    formData.append("images", file);
+  });
+  const url = `${document.location.origin}/files/upload`;
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+    if (!response.ok) throw new Error(`Response status: ${response.status}`);
+
+    const result = await response.json();
+    console.log(result);
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 function showImagesPreviews() {
@@ -28,13 +51,15 @@ function showImagesPreviews() {
     deleteButton.appendChild(deleteIcon);
     previewContainer.appendChild(image);
     previewContainer.appendChild(deleteButton);
-
     imagesPreviews.appendChild(previewContainer);
+
     files.push(file);
+    imagesInput.value = files;
 
     deleteButton.addEventListener("click", () => {
       imagesPreviews.removeChild(previewContainer);
       files = files.filter((item) => item !== file);
+      imagesInput.value = files;
 
       updateFileCount();
     });
@@ -51,6 +76,7 @@ function checkFileSize() {
 
       imagesPreviews.replaceChildren();
       files.length = 0;
+      imagesInput.value = files;
 
       return;
     }

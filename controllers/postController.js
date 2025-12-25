@@ -1,10 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
-import {
-  requiredErr,
-  lengthErr,
-  uploadFiles,
-  deleteAllFiles,
-} from "../utils.js";
+import { requiredErr, lengthErr, deleteAllFiles } from "../utils.js";
 import { postDb } from "../db/Post.js";
 import { folderDb } from "../db/Folder.js";
 
@@ -30,7 +25,7 @@ const validatePostForm = [
 
       return true;
     })
-    .withMessage("There must no more than 8 images selected"),
+    .withMessage("There must not be more than 8 images selected"),
   body("folderId")
     .custom((value) => {
       // only allow numbers, as that's what our folder ids are currently!
@@ -72,8 +67,11 @@ const getPostForm = async (req, res) => {
 };
 
 const postPostForm = [
-  validatePostForm,
+  /*
+  // validatePostForm,
   async (req, res, next) => {
+    console.log(req.body.images[0]);
+    res.redirect("/posts");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const folders = await folderDb.getAllFolders();
@@ -97,6 +95,7 @@ const postPostForm = [
       return next(err);
     }
   },
+  */
 ];
 
 const getEditForm = async (req, res) => {

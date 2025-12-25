@@ -1,4 +1,3 @@
-import multer from "multer";
 import { Router } from "express";
 import {
   getAllPosts,
@@ -9,10 +8,7 @@ import {
   postPostForm,
 } from "../controllers/postController.js";
 import { checkUser } from "../utils.js";
-
-// use a memory storage since the files will be stored to Supabase
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+import { upload } from "../utils.js";
 
 const postRouter = Router();
 

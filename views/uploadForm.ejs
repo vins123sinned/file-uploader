@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
-  <script src="/js/uploadForm.js" defer></script>
+  <script src="/js/uploadForm.js" type="module" defer></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
 </head>
 <body>
@@ -19,11 +19,9 @@
       </span>
     </p>
     <p>
-      <label for="images">Files</label>
-      <input type="file" name="images" id="images" multiple="true" accept="image/png, image/jpeg" required>
-      <span class="images-previews">
-
-      </span>
+      <label for="add-images">Add images</label>
+      <input type="file" name="add-images" id="add-images" multiple="true" accept="image/png, image/jpeg" required>
+      <span class="images-previews"></span>
       <span class="files-counter">
         <span class="file-count">0</span>/8 files
       </span>
@@ -49,6 +47,7 @@
   <section>
     <button type="submit">Upload</button>
   </section>
+  <input type="hidden" name="image-links" id="image-links">
 </form>
 </body>
 </html>
