@@ -67,6 +67,7 @@ const getPostForm = async (req, res) => {
 };
 
 const postPostForm = [
+  (req, res, next) => next(),
   /*
   // validatePostForm,
   async (req, res, next) => {
