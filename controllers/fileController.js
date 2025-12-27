@@ -47,7 +47,11 @@ const postUploadFiles = async (req, res, next) => {
           uploadedFile.publicUrl,
         );
 
-        return { id: insertedFile.id, url: uploadedFile.publicUrl };
+        return {
+          name: filename,
+          id: insertedFile.id,
+          url: uploadedFile.publicUrl,
+        };
       } catch (err) {
         next(err);
       }
@@ -68,4 +72,25 @@ const postDeleteFile = async (req, res, next) => {
   }
 };
 
-export { getAllFiles, getFile, postUploadFiles, postDeleteFile };
+const postDeleteSupabaseFile = async (req, res, next) => {
+  const { fileName } = req.params;
+
+  try {
+    const { data, error } = await supabase.storage
+      .from("image")
+      .remove([fileName]);
+
+    if (error) throw error;
+    res.json(data);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export {
+  getAllFiles,
+  getFile,
+  postUploadFiles,
+  postDeleteFile,
+  postDeleteSupabaseFile,
+};

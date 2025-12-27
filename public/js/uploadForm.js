@@ -6,14 +6,14 @@ const imagesPreviews = document.querySelector(".images-previews");
 
 let filesData = [];
 
-function fileChange() {
+async function fileChange() {
   // start with no errors. If there is an error, it will be written!
   fileInputError.classList.remove("invalid");
   fileInputError.textContent = "";
 
   checkFileSize();
-  showImagesPreviews();
-  uploadFiles();
+  const fileNames = await uploadFiles();
+  showImagesPreviews(fileNames);
   updateFileCount();
 }
 
@@ -34,8 +34,11 @@ async function uploadFiles() {
     const result = await response.json();
     filesData.push(...result);
     imagesInput.value = JSON.stringify(filesData);
+
+    return filesData.map((file) => file.name);
   } catch (err) {
     fileInput.value = "";
+    imagesInput.value = "";
     fileInputError.classList.add("invalid");
     fileInputError.textContent =
       "There was an error uploading your images. Please try again.";
@@ -43,17 +46,22 @@ async function uploadFiles() {
     imagesPreviews.replaceChildren();
     filesData.length = 0;
     imagesInput.value = JSON.stringify(filesData);
-
-    return;
+  } finally {
+    updateFileCount();
   }
 }
 
-function showImagesPreviews() {
-  Array.from(fileInput.files).forEach((file) => {
+function showImagesPreviews(fileNames) {
+  if (!fileNames) return;
+
+  for (let i = 0; i < fileInput.files.length; i++) {
+    const file = fileInput.files[i];
+
     const previewContainer = document.createElement("div");
     const image = document.createElement("img");
     image.alt = `Preview image of ${file.name}`;
     image.height = "200";
+    image.dataset.name = fileNames[i];
     image.src = URL.createObjectURL(file);
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
@@ -67,15 +75,36 @@ function showImagesPreviews() {
     previewContainer.appendChild(deleteButton);
     imagesPreviews.appendChild(previewContainer);
 
-    deleteButton.addEventListener("click", () => {
-      // update
-      imagesPreviews.removeChild(previewContainer);
-      filesData = filesData.filter((item) => item !== file);
-      imagesInput.value = JSON.stringify(filesData);
+    deleteButton.addEventListener("click", async () => {
+      const url = `${document.location.origin}/files/delete-supabase/${image.dataset.name}`;
 
-      updateFileCount();
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+        });
+        if (!response.ok)
+          throw new Error(`Response status: ${response.status}`);
+
+        imagesPreviews.removeChild(previewContainer);
+        filesData = filesData.filter(
+          (item) => item.name !== image.dataset.name,
+        );
+        imagesInput.value = JSON.stringify(filesData);
+      } catch (err) {
+        fileInput.value = "";
+        imagesInput.value = "";
+        fileInputError.classList.add("invalid");
+        fileInputError.textContent =
+          "There was an error deleting your image. Please try again.";
+
+        imagesPreviews.replaceChildren();
+        filesData.length = 0;
+        imagesInput.value = JSON.stringify(filesData);
+      } finally {
+        updateFileCount();
+      }
     });
-  });
+  }
 }
 
 function checkFileSize() {
@@ -83,6 +112,7 @@ function checkFileSize() {
     // 1000000 bytes is a megabyte!
     if (file.size >= 1000000) {
       fileInput.value = "";
+      imagesInput.value = "";
       fileInputError.classList.add("invalid");
       fileInputError.textContent = "Files must not exceed 1 MB";
 
