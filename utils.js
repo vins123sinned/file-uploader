@@ -41,8 +41,6 @@ const deleteAllFiles = async (postId) => {
     .remove(filePaths);
 
   if (error) throw error;
-
-  console.log(files);
 };
 
 export { upload, requiredErr, lengthErr, checkUser, deleteAllFiles };
