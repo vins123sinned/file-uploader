@@ -4,16 +4,20 @@ const imagesInput = document.querySelector("#image-links");
 const fileCountSpan = document.querySelector(".file-count");
 const imagesPreviews = document.querySelector(".images-previews");
 
-let files = [];
+let filesData = [];
 
 function fileChange() {
+  // start with no errors. If there is an error, it will be written!
+  fileInputError.classList.remove("invalid");
+  fileInputError.textContent = "";
+
   checkFileSize();
   showImagesPreviews();
   uploadFiles();
   updateFileCount();
 }
 
-async function uploadFiles(files) {
+async function uploadFiles() {
   const formData = new FormData();
   Array.from(fileInput.files).forEach((file) => {
     formData.append("images", file);
@@ -28,9 +32,19 @@ async function uploadFiles(files) {
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
     const result = await response.json();
-    console.log(result);
+    filesData.concat(result);
+    imagesInput.value = filesData;
   } catch (err) {
-    console.log(err.message);
+    fileInput.value = "";
+    fileInputError.classList.add("invalid");
+    fileInputError.textContent =
+      "There was an error uploading your images. Please try again.";
+
+    imagesPreviews.replaceChildren();
+    filesData.length = 0;
+    imagesInput.value = filesData;
+
+    return;
   }
 }
 
@@ -53,13 +67,11 @@ function showImagesPreviews() {
     previewContainer.appendChild(deleteButton);
     imagesPreviews.appendChild(previewContainer);
 
-    files.push(file);
-    imagesInput.value = files;
-
     deleteButton.addEventListener("click", () => {
+      // update
       imagesPreviews.removeChild(previewContainer);
-      files = files.filter((item) => item !== file);
-      imagesInput.value = files;
+      filesData = filesData.filter((item) => item !== file);
+      imagesInput.value = filesData;
 
       updateFileCount();
     });
@@ -75,19 +87,16 @@ function checkFileSize() {
       fileInputError.textContent = "Files must not exceed 1 MB";
 
       imagesPreviews.replaceChildren();
-      files.length = 0;
-      imagesInput.value = files;
+      filesData.length = 0;
+      imagesInput.value = filesData;
 
       return;
     }
   }
-
-  fileInputError.classList.remove("invalid");
-  fileInputError.textContent = "";
 }
 
 function updateFileCount() {
-  const fileCount = files.length;
+  const fileCount = filesData.length;
 
   if (fileCount > 8) {
     fileCountSpan.classList.add("invalid");
