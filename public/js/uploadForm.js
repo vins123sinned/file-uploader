@@ -32,8 +32,8 @@ async function uploadFiles() {
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
     const result = await response.json();
-    filesData.concat(result);
-    imagesInput.value = filesData;
+    filesData.push(...result);
+    imagesInput.value = JSON.stringify(filesData);
   } catch (err) {
     fileInput.value = "";
     fileInputError.classList.add("invalid");
@@ -42,7 +42,7 @@ async function uploadFiles() {
 
     imagesPreviews.replaceChildren();
     filesData.length = 0;
-    imagesInput.value = filesData;
+    imagesInput.value = JSON.stringify(filesData);
 
     return;
   }
@@ -71,7 +71,7 @@ function showImagesPreviews() {
       // update
       imagesPreviews.removeChild(previewContainer);
       filesData = filesData.filter((item) => item !== file);
-      imagesInput.value = filesData;
+      imagesInput.value = JSON.stringify(filesData);
 
       updateFileCount();
     });
@@ -88,7 +88,7 @@ function checkFileSize() {
 
       imagesPreviews.replaceChildren();
       filesData.length = 0;
-      imagesInput.value = filesData;
+      imagesInput.value = JSON.stringify(filesData);
 
       return;
     }
