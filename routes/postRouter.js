@@ -4,7 +4,6 @@ import {
   getPost,
   getPostForm,
   postDeletePost,
-  getEditForm,
   postPostForm,
 } from "../controllers/postController.js";
 import { checkUser } from "../utils.js";
@@ -15,7 +14,6 @@ const postRouter = Router();
 postRouter.get("/", getAllPosts);
 postRouter.get("/create", checkUser, getPostForm);
 postRouter.post("/create", [checkUser, upload.any()], postPostForm);
-postRouter.get("/edit/:postId", checkUser, getEditForm);
 postRouter.post("/delete/:postId", checkUser, postDeletePost);
 postRouter.get("/:postId", getPost);
 

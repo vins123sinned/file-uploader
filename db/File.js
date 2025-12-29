@@ -17,11 +17,12 @@ class File {
     return file;
   }
 
-  async insertFile(size, url) {
+  async insertFile(size, url, filename) {
     const file = await prisma.file.create({
       data: {
         size: size,
         url: url,
+        name: filename,
       },
     });
 

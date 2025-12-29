@@ -1,5 +1,10 @@
 import { body, validationResult, matchedData } from "express-validator";
-import { requiredErr, lengthErr, deleteAllFiles } from "../utils.js";
+import {
+  requiredErr,
+  lengthErr,
+  deleteAllFiles,
+  uploadFiles,
+} from "../utils.js";
 import { postDb } from "../db/Post.js";
 import { folderDb } from "../db/Folder.js";
 
@@ -68,11 +73,8 @@ const getPostForm = async (req, res) => {
 
 const postPostForm = [
   (req, res, next) => next(),
-  /*
-  // validatePostForm,
+  validatePostForm,
   async (req, res, next) => {
-    console.log(req.body.images[0]);
-    res.redirect("/posts");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const folders = await folderDb.getAllFolders();
@@ -96,24 +98,7 @@ const postPostForm = [
       return next(err);
     }
   },
-  */
 ];
-
-const getEditForm = async (req, res) => {
-  const { postId } = req.params;
-  const folders = await folderDb.getAllFolders();
-  const post = await postDb.getPost(postId);
-
-  res.render("uploadForm", {
-    title: "Upload post",
-    folders: folders,
-    previousValues: {
-      name: post.name,
-      images: post.files,
-      folderId: post.folderId,
-    },
-  });
-};
 
 const postDeletePost = async (req, res, next) => {
   const { postId } = req.params;
@@ -127,11 +112,4 @@ const postDeletePost = async (req, res, next) => {
   }
 };
 
-export {
-  getAllPosts,
-  getPost,
-  getPostForm,
-  postPostForm,
-  getEditForm,
-  postDeletePost,
-};
+export { getAllPosts, getPost, getPostForm, postPostForm, postDeletePost };
