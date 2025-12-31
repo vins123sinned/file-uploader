@@ -20,7 +20,7 @@
                 edit
               </span>
             </a>
-            <button type="button" class="share-button">
+            <button type="button" class="share-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
               <span class="material-symbols-outlined">
                 share
               </span>
@@ -54,11 +54,14 @@
   </form>
   <form action="/folders/share" method="POST" class="share-form hidden">
     <h1>Share folder</h1>
-    <select name="duration" id="duration">
-      <option value="day">1 day</option>
-      <option value="week">7 days</option>
-      <option value="month">30 days</option>
-    </select>
+    <p>
+      <select name="duration" id="duration">
+        <option value="day">1 day</option>
+        <option value="week">7 days</option>
+        <option value="month">30 days</option>
+      </select>
+    </p>
+    <button type="submit">share</button>
   </form>
 </body>
 </html>
