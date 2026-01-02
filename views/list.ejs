@@ -52,8 +52,11 @@
     <p>This action cannot be undone, so please proceed with caution.</p>
     <button type="submit">Delete</button>
   </form>
-  <form action="/folders/share" method="POST" class="share-form hidden">
+  <form action="<%= locals.action %>" method="POST" class="share-form <%= locals.errors ? "" : "hidden" %>">
     <h1>Share folder</h1>
+    <span class="error" role="alert" aria-live="polite">
+      <%= locals.errors?.find((error) => error.path === "duration")?.msg %>
+    </span>
     <p>
       <select name="duration" id="duration">
         <option value="day">1 day</option>

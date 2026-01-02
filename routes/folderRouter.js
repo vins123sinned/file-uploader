@@ -7,6 +7,7 @@ import {
   postDeleteFolder,
   postFolderForm,
   postEditForm,
+  postShareFolder,
 } from "../controllers/folderController.js";
 import { checkUser } from "../utils.js";
 
@@ -18,6 +19,7 @@ folderRouter.post("/create", checkUser, postFolderForm);
 folderRouter.get("/edit/:folderId", checkUser, getEditForm);
 folderRouter.post("/edit/:folderId", checkUser, postEditForm);
 folderRouter.post("/delete/:folderId", checkUser, postDeleteFolder);
+folderRouter.post("/share/:folderId", checkUser, postShareFolder);
 folderRouter.get("/:folderId", getFolder);
 
 export { folderRouter };
