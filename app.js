@@ -9,6 +9,7 @@ import { authenticationRouter } from "./routes/authenticationRouter.js";
 import { fileRouter } from "./routes/fileRouter.js";
 import { folderRouter } from "./routes/folderRouter.js";
 import { postRouter } from "./routes/postRouter.js";
+import { shareRouter } from "./routes/shareRouter.js";
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use("/", authenticationRouter);
 app.use("/files", fileRouter);
 app.use("/folders", folderRouter);
 app.use("/posts", postRouter);
+app.use("/share", shareRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT || 3000, (err) => {

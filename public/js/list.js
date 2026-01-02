@@ -21,7 +21,7 @@ deleteButtons.forEach((deleteButton) => {
 });
 
 shareButtons.forEach((shareButton) => {
-  const actionLink = `/${shareButton.dataset.subject}/share/${shareButton.dataset.id}`;
+  const actionLink = `/share/${shareButton.dataset.id}`;
 
   shareButton.addEventListener("click", () => {
     if (
