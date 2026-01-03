@@ -48,7 +48,16 @@ model File {
 }
 
 model Folder {
-  id    Int    @id @default(autoincrement())
-  name  String
-  posts Post[]
+  id     Int     @id @default(autoincrement())
+  name   String
+  posts  Post[]
+  shares Share[]
+}
+
+model Share {
+  id       Int      @id @default(autoincrement())
+  name     String
+  expired  DateTime
+  folder   Folder?  @relation(fields: [folderId], references: [id])
+  folderId Int
 }
