@@ -1,5 +1,6 @@
 import { body, validationResult, matchedData } from "express-validator";
 import { folderDb } from "../db/Folder.js";
+import { shareDb } from "../db/Share.js";
 
 const validateShareForm = [
   body("duration")
@@ -35,6 +36,21 @@ const postShareFolder = [
 
     const { duration } = matchedData(req);
     try {
+      const name = crypto.randomUUID();
+      const date = new Date();
+      switch (duration) {
+        case "day":
+          date.setDate(date.getDate() + 1);
+          break;
+        case "week":
+          date.setDate(date.getDate() + 7);
+          break;
+        case "month":
+          date.setDate(date.getDate() + 31);
+          break;
+      }
+
+      await shareDb.insertShare(name, date, folderId);
       res.redirect("/");
     } catch {
       next(err);

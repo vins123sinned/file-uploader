@@ -1,4 +1,4 @@
-import { prisma, supabase } from "./clients.js";
+import { prisma } from "./clients.js";
 
 class File {
   async getAllFiles() {
