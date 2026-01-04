@@ -50,9 +50,9 @@ const postShareFolder = [
           break;
       }
 
-      await shareDb.insertShare(name, date, folderId);
+      const sharedFolder = await shareDb.insertShare(name, date, folderId);
       res.redirect("/");
-    } catch {
+    } catch (err) {
       next(err);
     }
   },
