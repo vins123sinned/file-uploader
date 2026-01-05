@@ -18,6 +18,7 @@ const validateShareForm = [
 const postShareFolder = [
   validateShareForm,
   async (req, res, next) => {
+    console.log(req.body); // HELLO!
     const { folderId } = req.params;
     const errors = validationResult(req);
 
@@ -51,7 +52,7 @@ const postShareFolder = [
       }
 
       const sharedFolder = await shareDb.insertShare(name, date, folderId);
-      res.redirect("/");
+      res.json(sharedFolder);
     } catch (err) {
       next(err);
     }

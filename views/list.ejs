@@ -54,7 +54,7 @@
   </form>
   <form action="<%= locals.action %>" method="POST" class="share-form <%= locals.errors ? "" : "hidden" %>">
     <h1>Share folder</h1>
-    <span class="error" role="alert" aria-live="polite">
+    <span class="error share-form-error" role="alert" aria-live="polite">
       <%= locals.errors?.find((error) => error.path === "duration")?.msg %>
     </span>
     <p>
@@ -64,7 +64,7 @@
         <option value="month">31 days</option>
       </select>
     </p>
-    <button type="submit">share</button>
+    <button type="button" class="share-form-submit">share</button>
   </form>
 </body>
 </html>

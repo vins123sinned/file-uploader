@@ -1,5 +1,7 @@
 const shareButtons = document.querySelectorAll(".share-button");
 const shareForm = document.querySelector(".share-form");
+const shareFormError = document.querySelector(".share-form-error");
+const shareFormSubmit = document.querySelector(".share-form-submit");
 const deleteButtons = document.querySelectorAll(".delete-button");
 const deleteForm = document.querySelector(".delete-form");
 
@@ -36,3 +38,30 @@ shareButtons.forEach((shareButton) => {
     }
   });
 });
+
+shareFormSubmit.addEventListener("click", async () => {
+  if (shareForm.getAttribute("action") === "") return;
+
+  const url = shareForm.action;
+  const data = new FormData(shareForm);
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: new URLSearchParams(data), // Turns FormData from multipart to url-encoded!
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    showShareLink(result);
+  } catch (err) {
+    shareFormError.textContent = `An error has occurred. Please try again.`;
+    console.error(err.message);
+  }
+});
+
+function showShareLink(result) {
+  // show the link for the user!
+}
