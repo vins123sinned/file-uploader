@@ -4,6 +4,8 @@ const shareFormError = document.querySelector(".share-form-error");
 const shareFormSubmit = document.querySelector(".share-form-submit");
 const deleteButtons = document.querySelectorAll(".delete-button");
 const deleteForm = document.querySelector(".delete-form");
+const linkContainer = document.querySelector(".link-container");
+const linkPara = document.querySelector(".link-para");
 
 deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
@@ -63,5 +65,9 @@ shareFormSubmit.addEventListener("click", async () => {
 });
 
 function showShareLink(result) {
-  // show the link for the user!
+  shareForm.classList.add("hidden");
+  shareForm.setAttribute("action", "");
+
+  linkContainer.classList.remove("hidden");
+  linkPara.textContent = `${window.location.origin}/share/${result.name}`;
 }
