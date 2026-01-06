@@ -15,6 +15,25 @@ const validateShareForm = [
     .withMessage("The selected option is invalid"),
 ];
 
+const getShareFolder = async (req, res, next) => {
+  const { folderName } = req.params;
+
+  try {
+    const sharedFolder = await shareDb.getShare(folderName);
+
+    if (sharedFolder === null) throw new Error("No link found!");
+
+    const folder = await folderDb.getFolder(sharedFolder.folderId);
+    const posts = await folderDb.getAllPosts(sharedFolder.folderId);
+    res.render("folderDetail", {
+      folder: folder,
+      posts: posts,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const postShareFolder = [
   validateShareForm,
   async (req, res, next) => {
@@ -59,4 +78,4 @@ const postShareFolder = [
   },
 ];
 
-export { postShareFolder };
+export { getShareFolder, postShareFolder };
