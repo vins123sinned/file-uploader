@@ -20,8 +20,9 @@ const getShareFolder = async (req, res, next) => {
 
   try {
     const sharedFolder = await shareDb.getShare(folderName);
-
     if (sharedFolder === null) throw new Error("No link found!");
+    const isExpired = Date.parse(new Date()) > Date.parse(sharedFolder.expired);
+    if (isExpired) throw new Error("Link has expired!");
 
     const folder = await folderDb.getFolder(sharedFolder.folderId);
     const posts = await folderDb.getAllPosts(sharedFolder.folderId);
