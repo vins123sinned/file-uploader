@@ -10,6 +10,7 @@ import { fileRouter } from "./routes/fileRouter.js";
 import { folderRouter } from "./routes/folderRouter.js";
 import { postRouter } from "./routes/postRouter.js";
 import { shareRouter } from "./routes/shareRouter.js";
+import { indexRouter } from "./routes/indexRouter.js";
 
 const app = express();
 
@@ -48,7 +49,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => res.render("basicHomepage"));
+app.use("/", indexRouter);
 app.use("/", authenticationRouter);
 app.use("/files", fileRouter);
 app.use("/folders", folderRouter);
