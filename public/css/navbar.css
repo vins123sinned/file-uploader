@@ -1,0 +1,32 @@
+.post-folder-options .menu-icon {
+  font-size: 2rem;
+  line-height: normal;
+  margin-right: 1rem;
+}
+
+.logo {
+  font-family: "angleciaprodisplay", serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.user-options {
+  margin-left: auto;
+}
+
+.profile-picture {
+  height: 2.5rem;
+  margin-top: 0.25rem;
+}
+
+.user-options .links {
+  display: none;
+}
+
+/*.user-options a {
+  background-color: rgb(226, 229, 233);
+}
+
+.user-options a:not(:last-child) {
+  margin-right: 1rem;
+}*/

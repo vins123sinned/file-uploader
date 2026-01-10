@@ -1,0 +1,27 @@
+<header>
+  <nav>
+    <ul>
+      <li class="post-folder-options">
+        <span class="material-symbols-outlined menu-icon">
+          menu
+        </span>
+      </li>
+      <li>
+        <a href="/" class="logo">Alimenté</a>
+      </li>
+      <li>
+      </li>
+      <li class="user-options">
+        <img src="/images/default-pfp.png" alt="Profile picture" class="profile-picture">
+        <div class="links">
+          <% if (!locals.currentUser) { %>
+            <a href="/login">Log In</a>
+            <a href="/signup">Sign Up</a>
+          <% } else { %>
+            <a href="/logout">Log Out</a>
+          <% } %>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
