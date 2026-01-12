@@ -1,10 +1,30 @@
 <header>
   <nav>
-    <ul>
+    <ul class="header-ul">
       <li class="post-folder-options">
         <span class="material-symbols-outlined menu-icon">
           menu
         </span>
+        <div class="post-folder-links option-links hidden">
+          <ul>
+            <li>
+              <a href="/posts">
+                <span class="material-symbols-outlined">
+                  chat
+                </span>
+                All Posts
+              </a>
+            </li>
+            <li>
+              <a href="/folders">
+                <span class="material-symbols-outlined">
+                  folder
+                </span>
+                All Folders
+              </a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
         <a href="/" class="logo">Alimenté</a>
@@ -13,13 +33,36 @@
       </li>
       <li class="user-options">
         <img src="/images/default-pfp.png" alt="Profile picture" class="profile-picture">
-        <div class="links">
-          <% if (!locals.currentUser) { %>
-            <a href="/login">Log In</a>
-            <a href="/signup">Sign Up</a>
-          <% } else { %>
-            <a href="/logout">Log Out</a>
-          <% } %>
+        <div class="user-links option-links hidden">
+          <ul>
+            <% if (!locals.currentUser) { %>
+              <li>
+                <a href="/login">
+                  <span class="material-symbols-outlined">
+                    login
+                  </span>
+                  Log In
+                </a>
+              </li>
+              <li>
+                <a href="/signup">
+                  <span class="material-symbols-outlined">
+                    account_box
+                  </span>
+                  Sign Up
+                </a>
+              </li>
+            <% } else { %>
+              <li>
+                <a href="/logout">
+                  <span class="material-symbols-outlined">
+                    logout
+                  </span>
+                  Log Out
+                </a>
+              </li>
+            <% } %>
+          </ul>
         </div>
       </li>
     </ul>

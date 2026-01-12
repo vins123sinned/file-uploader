@@ -8,6 +8,19 @@
   font-display: swap;
 }
 
+:root {
+  --main-background-color: #fff;
+  --secondary-background-color: #f9faf0;
+  --box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --border-radius: 15px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body,
 ul {
   padding: 0;
@@ -27,16 +40,17 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+  background-color: var(--secondary-background-color);
 }
 
 header {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: var(--main-background-color);
+  box-shadow: var(--box-shadow);
 }
 
 ul {
   display: flex;
   align-items: center;
-  height: 3.5rem;
   padding: 0 1rem;
 }
 
@@ -47,4 +61,8 @@ li {
 a {
   color: #000;
   text-decoration: none;
+}
+
+.hidden {
+  display: none;
 }

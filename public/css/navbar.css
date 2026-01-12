@@ -1,7 +1,63 @@
+.header-ul {
+  height: 3.5rem;
+}
+
 .post-folder-options .menu-icon {
   font-size: 2rem;
   line-height: normal;
   margin-right: 1rem;
+}
+
+.option-links {
+  position: absolute;
+  top: 3.5rem;
+
+  background-color: var(--main-background-color);
+  border-radius: var(--border-radius);
+  width: calc(100% - 1rem);
+  max-width: 22.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+.post-folder-links {
+  left: 0;
+  right: 0;
+}
+
+.user-links {
+  right: 0;
+}
+
+.option-links ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.option-links li {
+  width: 100%;
+}
+
+.option-links a {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.option-links a:hover {
+  background-color: #f0f0f0;
+}
+
+.option-links .material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
+  font-size: 1.5rem;
+  background-color: #e2e5e9;
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin: 0.5rem;
 }
 
 .logo {
@@ -21,6 +77,12 @@
 
 .user-options .links {
   display: none;
+}
+
+/* Shared CSS */
+.post-folder-options .menu-icon:hover,
+.profile-picture:hover {
+  cursor: pointer;
 }
 
 /*.user-options a {
