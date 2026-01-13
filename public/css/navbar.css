@@ -66,6 +66,10 @@
   font-weight: 600;
 }
 
+.food-emojis-li {
+  display: none;
+}
+
 .user-options {
   margin-left: auto;
 }
@@ -85,10 +89,100 @@
   cursor: pointer;
 }
 
-/*.user-options a {
-  background-color: rgb(226, 229, 233);
+@media (min-width: 750px) {
+  .logo-li {
+    order: -1;
+  }
+
+  .post-folder-options {
+    margin-left: auto;
+  }
+
+  .post-folder-options .menu-icon {
+    display: none;
+  }
+
+  .post-folder-links {
+    display: block;
+    position: static;
+    background-color: transparent;
+    border-radius: 0;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .post-folder-links ul {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .post-folder-links li {
+    border-bottom: 1px solid transparent;
+    width: auto;
+    margin-right: clamp(1rem, 2vw, 2rem);
+  }
+
+  .post-folder-links li:hover {
+    border-color: #000;
+    transition: border-color 0.5s ease;
+  }
+
+  .post-folder-links a .material-symbols-outlined {
+    display: none;
+  }
+
+  .post-folder-links a:hover {
+    background-color: transparent;
+  }
+
+  .user-options {
+    margin-left: 0;
+  }
 }
 
-.user-options a:not(:last-child) {
-  margin-right: 1rem;
-}*/
+@media (min-width: 1000px) {
+  .food-emojis-li {
+    display: block;
+    margin: 0 auto;
+
+    order: -1;
+  }
+
+  .emoji {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: clamp(0.5rem, 6vw, 2.5rem);
+  }
+
+  .emoji:hover {
+    cursor: default;
+    animation:
+      wiggle 2s infinite,
+      scale 2s infinite alternate;
+  }
+
+  .post-folder-options {
+    margin-left: 0;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: scale(1.5) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.5) rotate(5deg);
+  }
+  50% {
+    transform: scale(1.5) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.5) rotate(-5deg);
+  }
+  100% {
+    transform: scale(1.5) rotate(0deg);
+  }
+}
