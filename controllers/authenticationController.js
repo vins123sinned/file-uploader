@@ -54,7 +54,10 @@ const validateSignUp = [
 ];
 
 const getLogIn = (req, res) => {
-  res.render("login");
+  res.render("layout", {
+    title: "Log in",
+    path: "partials/login.ejs",
+  });
 };
 
 const postLogIn = (req, res, next) => {
@@ -62,7 +65,9 @@ const postLogIn = (req, res, next) => {
     if (err) return next(err);
 
     if (!user) {
-      return res.status(400).render("login", {
+      return res.status(400).render("layout", {
+        title: "Log in",
+        path: "partials/login.ejs",
         previousValues: req.body,
         errors: [
           {
@@ -86,7 +91,10 @@ passport.authenticate("local", {
 });
 
 const getSignUp = (req, res) => {
-  res.render("signup");
+  res.render("layout", {
+    title: "Sign up",
+    path: "partials/signup.ejs",
+  });
 };
 
 const postSignUp = [
@@ -94,7 +102,9 @@ const postSignUp = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("signup", {
+      return res.status(400).render("layout", {
+        title: "Sign up",
+        path: "partials/signup.ejs",
         previousValues: req.body,
         errors: errors.array(),
       });

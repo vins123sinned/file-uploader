@@ -1,0 +1,21 @@
+<form action="/login" method="POST">
+  <span class="logo-circle">A</span>
+  <h1>Log in</h1>
+  <span class="error" role="alert" aria-live="polite">
+    <%= locals.errors?.find((error) => error.path === "authentication")?.msg %>
+  </span>
+  <section>
+    <p>
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" value="<%= locals.previousValues?.email %>" required autofocus>
+    </p>
+    <p>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" value="<%= locals.previousValues?.password %>" required>
+    </p>
+  </section>
+  <section>
+    <button type="submit">Log in</button>
+  </section>
+</form>
+<p class="link-redirect">Don't have an account yet? <a href="/signup">Create an account</a></p>
