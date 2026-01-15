@@ -1,3 +1,162 @@
-.hidden {
-  display: none;
+main {
+  margin: 0 1rem;
+}
+
+h2 {
+  margin: 0 0 1rem 0;
+}
+
+.heading-container,
+.add-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-link {
+  background-color: #e2e5e9;
+  border-radius: 5px;
+  padding: 0.35rem 0.75rem;
+}
+
+.add-link:hover {
+  background-color: #d2d4d8;
+}
+
+.add-link:active {
+  background-color: #e2e5e9;
+}
+
+.add-link .material-symbols-outlined {
+  margin-right: 0.5rem;
+}
+
+.list {
+  max-width: 56.25rem;
+  margin: 2.5rem auto 0 auto;
+}
+
+.list li:not(:last-child) {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.list li:not(:last-child):hover .list-options {
+  display: block !important;
+}
+
+.list li:not(:last-child):hover .images-options {
+  display: flex !important;
+}
+
+.list li,
+.end-li {
+  position: relative;
+}
+
+.end-li {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.end-li p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.end-li p::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #d1d9e0;
+  z-index: -1;
+}
+
+.end-li span {
+  display: inline;
+  padding-inline: 0.5rem;
+  background-color: var(--secondary-background-color);
+}
+
+.images-container {
+  max-width: 80%;
+  height: 19rem;
+  margin: 0 auto;
+}
+
+.images-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.images-options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.images-options button {
+  background-color: #e2e5e9;
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.images-options button:hover {
+  cursor: pointer;
+  background-color: #d2d4d8;
+}
+
+.images-options button:active {
+  background-color: #e2e5e9;
+}
+
+.images-options .material-symbols-outlined {
+  font-size: 2.5rem;
+}
+
+.images-options .arrow-back {
+  margin-left: 0.35rem;
+  margin-top: 0.1rem;
+}
+
+.images-options .arrow-forward {
+  margin-left: 0.15rem;
+  margin-top: 0.15rem;
+}
+
+.delete-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  color: #fff;
+  background-color: #ce2b2b;
+  border: none;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  background-color: #bb2727;
+}
+
+.delete-button:active {
+  background-color: #ce2b2b;
 }

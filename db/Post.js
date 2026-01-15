@@ -2,7 +2,11 @@ import { prisma } from "./clients.js";
 
 class Post {
   async getAllPosts() {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      include: {
+        files: true,
+      },
+    });
 
     return posts;
   }

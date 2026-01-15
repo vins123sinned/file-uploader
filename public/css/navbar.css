@@ -1,3 +1,9 @@
+header ul {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
 .header-ul {
   height: 3.5rem;
 }

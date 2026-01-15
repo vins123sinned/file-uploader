@@ -58,4 +58,4 @@ async function getRandomFoodEmojis() {
   }
 }
 
-getRandomFoodEmojis();
+//getRandomFoodEmojis();

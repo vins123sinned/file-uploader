@@ -47,7 +47,9 @@ const validatePostForm = [
 const getAllPosts = async (req, res) => {
   const posts = await postDb.getAllPosts();
 
-  res.render("list", {
+  res.render("layout", {
+    title: "All posts",
+    path: "partials/list.ejs",
     subject: "posts",
     items: posts,
   });
