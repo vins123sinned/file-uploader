@@ -12,6 +12,8 @@
   --main-background-color: #fff;
   --secondary-background-color: #f9faf0;
   --box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --default-button-background: #e2e5e9;
+  --default-button-hover-background: #d2d4d8;
   --border-radius: 15px;
 }
 
@@ -64,4 +66,19 @@ a {
 
 .hidden {
   display: none !important;
+}
+
+/* if the body doesn't have an overlay with the "hidden" class */
+body:has(.overlay:not(.hidden)) {
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.3);
 }

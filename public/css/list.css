@@ -14,17 +14,17 @@ h2 {
 }
 
 .add-link {
-  background-color: #e2e5e9;
+  background-color: var(--default-button-background);
   border-radius: 5px;
   padding: 0.35rem 0.75rem;
 }
 
 .add-link:hover {
-  background-color: #d2d4d8;
+  background-color: var(--default-button-hover-background);
 }
 
 .add-link:active {
-  background-color: #e2e5e9;
+  background-color: var(--default-button-background);
 }
 
 .add-link .material-symbols-outlined {
@@ -36,7 +36,9 @@ h2 {
   margin: 2.5rem auto 0 auto;
 }
 
-.list li:not(:last-child) {
+.list li:not(:last-child),
+.delete-form,
+.share-form {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -110,20 +112,22 @@ h2 {
 }
 
 .images-options button {
-  background-color: #e2e5e9;
+  background-color: var(--default-button-background);
   border: none;
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
 }
 
-.images-options button:hover {
+.images-options button:hover,
+.form-cancel-button:hover {
   cursor: pointer;
-  background-color: #d2d4d8;
+  background-color: var(--default-button-hover-background);
 }
 
-.images-options button:active {
-  background-color: #e2e5e9;
+.images-options button:active,
+.form-cancel-button:active {
+  background-color: var(--default-button-background);
 }
 
 .images-options .material-symbols-outlined {
@@ -144,7 +148,11 @@ h2 {
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
 
+.delete-button,
+.form-cancel-button,
+.form-delete-button {
   color: #fff;
   background-color: #ce2b2b;
   border: none;
@@ -152,11 +160,76 @@ h2 {
   padding: 0.25rem 0.5rem;
 }
 
-.delete-button:hover {
+.delete-button:hover,
+.form-delete-button:hover {
   cursor: pointer;
   background-color: #bb2727;
 }
 
-.delete-button:active {
+.delete-button:active,
+.form-delete-button:active {
   background-color: #ce2b2b;
+}
+
+/* afterwards do mobile styling */
+
+.delete-form,
+.share-form {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90%;
+  max-width: 41rem;
+  padding: 1rem;
+  margin-bottom: 0;
+
+  z-index: 999;
+}
+
+.delete-form h1,
+.share-form h1 {
+  margin: 0 0 1rem 0;
+}
+
+.button-options {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-cancel-button {
+  color: #000;
+  background-color: var(--default-button-background);
+  margin-right: 1rem;
+}
+
+.form-cancel-button,
+.form-delete-button,
+.form-share-button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.form-share-button {
+  background-color: #dae4ba;
+  border: none;
+  border-radius: 5px;
+}
+
+.form-share-button:hover {
+  cursor: pointer;
+  background-color: #ccd5ae;
+}
+
+.form-share-button:active {
+  background-color: #dae4ba;
+}
+
+#duration {
+  font-size: 1rem;
+  background-color: #ececec;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 3rem 0.5rem 1rem;
 }

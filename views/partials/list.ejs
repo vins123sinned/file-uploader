@@ -71,7 +71,10 @@
 <form action="" method="POST" class="delete-form hidden">
   <h1>Delete form?</h1>
   <p>This action cannot be undone, so please proceed with caution.</p>
-  <button type="submit">Delete</button>
+  <div class="button-options">
+    <button type="button" class="form-cancel-button">Cancel</button>
+    <button type="submit" class="form-delete-button">Delete</button>
+  </div>
 </form>
 <form action="<%= locals.action %>" method="POST" class="share-form <%= locals.errors ? "" : "hidden" %>">
   <h1>Share folder</h1>
@@ -85,9 +88,13 @@
       <option value="month">31 days</option>
     </select>
   </p>
-  <button type="button" class="share-form-submit">share</button>
+  <div class="button-options">
+    <button type="button" class="form-cancel-button">Cancel</button>
+    <button type="button" class="form-share-button">Share</button>
+  </div>
 </form>
 <div class="link-container hidden">
   <h1>Here is your link</h1>
   <p class="link-para"></p>
 </div>
+<div class="overlay hidden"></div>
