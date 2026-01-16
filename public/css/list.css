@@ -36,7 +36,7 @@ h2 {
   margin: 2.5rem auto 0 auto;
 }
 
-.list li:not(:last-child),
+.post-li,
 .delete-form,
 .share-form {
   background-color: #fff;
@@ -47,11 +47,11 @@ h2 {
   margin-bottom: 1rem;
 }
 
-.list li:not(:last-child):hover .list-options {
+.post-li:hover .list-options {
   display: block !important;
 }
 
-.list li:not(:last-child):hover .images-options {
+.post-li:hover .images-options {
   display: flex !important;
 }
 
@@ -130,6 +130,11 @@ h2 {
   background-color: var(--default-button-background);
 }
 
+.images-options button:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 .images-options .material-symbols-outlined {
   font-size: 2.5rem;
 }
@@ -175,7 +180,7 @@ h2 {
 
 .delete-form,
 .share-form {
-  position: absolute;
+  position: fixed;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);

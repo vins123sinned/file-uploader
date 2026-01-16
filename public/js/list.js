@@ -1,3 +1,4 @@
+const posts = document.querySelectorAll(".post-li");
 const shareButtons = document.querySelectorAll(".share-button");
 const shareForm = document.querySelector(".share-form");
 const shareFormError = document.querySelector(".share-form-error");
@@ -6,6 +7,41 @@ const deleteButtons = document.querySelectorAll(".delete-button");
 const deleteForm = document.querySelector(".delete-form");
 const linkContainer = document.querySelector(".link-container");
 const linkPara = document.querySelector(".link-para");
+const formCancelButtons = document.querySelectorAll(".form-cancel-button");
+const overlay = document.querySelector(".overlay");
+
+posts.forEach((post) => {
+  const images = post.querySelectorAll("img");
+  const arrowBack = post.querySelector(".arrow-back-button");
+  const arrowForward = post.querySelector(".arrow-forward-button");
+
+  if (images.length === 1) {
+    // only one image, so disable image slider
+    arrowBack.setAttribute("disabled", "disabled");
+    arrowForward.setAttribute("disabled", "disabled");
+  } else {
+    let position = 0;
+
+    arrowBack.addEventListener("click", () => {
+      images[position].classList.add("hidden");
+
+      position--;
+      if (position === -1) position = images.length - 1;
+
+      console.log(position);
+      console.log(images[position]);
+      images[position].classList.remove("hidden");
+    });
+    arrowForward.addEventListener("click", () => {
+      images[position].classList.add("hidden");
+
+      position++;
+      if (position > images.length - 1) position = 0;
+
+      images[position].classList.remove("hidden");
+    });
+  }
+});
 
 deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
@@ -17,9 +53,11 @@ deleteButtons.forEach((deleteButton) => {
     ) {
       deleteForm.setAttribute("action", actionLink);
       deleteForm.classList.remove("hidden");
+      overlay.classList.remove("hidden");
     } else {
       deleteForm.setAttribute("action", "");
       deleteForm.classList.add("hidden");
+      overlay.classList.add("hidden");
     }
   });
 });
@@ -34,9 +72,11 @@ shareButtons.forEach((shareButton) => {
     ) {
       shareForm.setAttribute("action", actionLink);
       shareForm.classList.remove("hidden");
+      overlay.classList.remove("hidden");
     } else {
       shareForm.setAttribute("action", "");
       shareForm.classList.add("hidden");
+      overlay.classList.add("hidden");
     }
   });
 });
@@ -63,6 +103,20 @@ shareFormSubmit.addEventListener("click", async () => {
     console.error(err.message);
   }
 });
+
+formCancelButtons.forEach((cancelButton) => {
+  cancelButton.addEventListener("click", hideForms);
+});
+
+overlay.addEventListener("click", hideForms);
+
+function hideForms() {
+  overlay.classList.add("hidden");
+  shareForm.classList.add("hidden");
+  shareForm.setAttribute("action", "");
+  deleteForm.classList.add("hidden");
+  deleteForm.setAttribute("action", "");
+}
 
 function showShareLink(result) {
   shareForm.classList.add("hidden");
