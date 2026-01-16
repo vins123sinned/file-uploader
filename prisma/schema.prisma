@@ -48,8 +48,9 @@ model File {
 }
 
 model Folder {
-  id     Int     @id @default(autoincrement())
+  id     Int      @id @default(autoincrement())
   name   String
+  date   DateTime @default(now())
   posts  Post[]
   shares Share[]
 }
