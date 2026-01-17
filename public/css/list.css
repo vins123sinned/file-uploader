@@ -56,11 +56,37 @@ h2 {
   display: flex !important;
 }
 
-.post-li h2 a {
+.post-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-title h2 {
+  margin: 0;
+}
+
+.post-title h2 a {
   color: #0969da;
 }
 
-.post-li h2 a:hover {
+.post-title h2 a:hover {
+  text-decoration: underline;
+}
+
+.post-title p {
+  font-size: 0.9rem;
+  border: 1px solid var(--default-button-hover-background);
+  border-radius: 500rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0 0 1.5rem;
+}
+
+.post-title p a {
+  color: #59636e;
+}
+
+.post-title p a:hover {
   text-decoration: underline;
 }
 

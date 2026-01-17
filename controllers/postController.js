@@ -46,12 +46,22 @@ const validatePostForm = [
 
 const getAllPosts = async (req, res) => {
   const posts = await postDb.getAllPosts();
+  const postsWithFolder = await Promise.all(
+    posts.map(async (post) => {
+      if (post.folderId) {
+        const folder = await folderDb.getFolder(post.folderId);
+        return { ...post, folderName: folder.name };
+      } else {
+        return post;
+      }
+    }),
+  );
 
   res.render("layout", {
     title: "All posts",
     path: "partials/list.ejs",
     subject: "posts",
-    items: posts,
+    items: postsWithFolder,
   });
 };
 

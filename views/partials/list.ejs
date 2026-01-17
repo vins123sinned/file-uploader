@@ -14,7 +14,16 @@
     <ul>
       <% items.forEach((item) => { %>
         <li class="post-li"  data-id="<%=item.id%>">
-          <h2><a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a></h2>
+          <div class="post-title">
+            <h2>
+              <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
+            </h2>
+            <% if (item.folderName) { %>
+              <p class="post-folder">
+                <a href="/folders/<%=item.folderId%>"><%=item.folderName%></a>
+              </p>
+            <% } %>
+          </div>
           <% if (subject === "posts") { %>
             <div class="images-container">
               <% item.files.forEach((file, index) => { %>
