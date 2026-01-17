@@ -68,6 +68,11 @@ a {
   display: none !important;
 }
 
+button:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 /* if the body doesn't have an overlay with the "hidden" class */
 body:has(.overlay:not(.hidden)) {
   overflow: hidden;

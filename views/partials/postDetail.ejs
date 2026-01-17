@@ -1,0 +1,29 @@
+<div class="post-container">
+  <p class="upload-date">Uploaded <%= date %></p>
+  <div class="post-title">
+    <h1><%= post.name %></h1>
+    <% if (folder) { %>
+      <p class="post-folder">
+        <a href="/folders/<%=folder.id%>"><%=folder.name%></a>
+      </p>
+    <% } %>
+  </div>
+  <div class="images-container">
+    <% post.files.forEach((file, index) => { %>
+      <img src="<%=file.url%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=post.name%> image">
+    <% }); %>
+    <div class="images-options hidden">
+      <button class="arrow-back-button" aria-label="Previous image">
+        <span class="material-symbols-outlined arrow-back">
+          arrow_back_ios
+        </span>
+      </button>
+      <button class="arrow-forward-button" aria-label="Next image">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward_ios
+        </span>
+      </button>
+    </div>
+  </div>
+  <button class="download-button" type="button">Download</button>
+</div>

@@ -1,4 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
+import { format } from "date-fns";
 import {
   requiredErr,
   lengthErr,
@@ -68,9 +69,15 @@ const getAllPosts = async (req, res) => {
 const getPost = async (req, res) => {
   const { postId } = req.params;
   const post = await postDb.getPost(postId);
+  const folder = await folderDb.getFolder(post.folderId);
+  const date = format(post.date, "PP");
 
-  res.render("postDetail", {
+  res.render("layout", {
+    title: post.name,
+    path: "partials/postDetail.ejs",
     post: post,
+    folder: folder,
+    date: date,
   });
 };
 

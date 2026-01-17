@@ -109,7 +109,7 @@ header ul {
   }
 
   .post-folder-links {
-    display: block;
+    display: block !important;
     position: static;
     background-color: transparent;
     border-radius: 0;

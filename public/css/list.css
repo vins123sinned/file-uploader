@@ -74,7 +74,7 @@ h2 {
   text-decoration: underline;
 }
 
-.post-title p {
+.post-folder {
   font-size: 0.9rem;
   border: 1px solid var(--default-button-hover-background);
   border-radius: 500rem;
@@ -82,11 +82,11 @@ h2 {
   margin: 0 0 0 1.5rem;
 }
 
-.post-title p a {
+.post-folder a {
   color: #59636e;
 }
 
-.post-title p a:hover {
+.post-folder a:hover {
   text-decoration: underline;
 }
 
@@ -165,11 +165,6 @@ h2 {
   background-color: var(--default-button-background);
 }
 
-.images-options button:disabled {
-  pointer-events: none;
-  opacity: 0.3;
-}
-
 .images-options .material-symbols-outlined {
   font-size: 2.5rem;
 }
@@ -210,8 +205,6 @@ h2 {
 .form-delete-button:active {
   background-color: #ce2b2b;
 }
-
-/* afterwards do mobile styling */
 
 .delete-form,
 .share-form,

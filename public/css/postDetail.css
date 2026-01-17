@@ -1,0 +1,140 @@
+main {
+  margin: 0 1rem;
+}
+
+.post-container {
+  position: relative;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: var(--box-shadow);
+  max-width: 56.25rem;
+  padding: 1rem;
+  margin: 4rem auto 0 auto;
+}
+
+.post-container:hover .images-options {
+  display: flex !important;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-title h1 {
+  margin: 0;
+}
+
+.post-folder {
+  display: inline-block;
+  font-size: 0.9rem;
+  border: 1px solid var(--default-button-hover-background);
+  border-radius: 500rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0 0 1.5rem;
+}
+
+.post-folder a {
+  color: #59636e;
+}
+
+.post-folder a:hover {
+  text-decoration: underline;
+}
+
+.upload-date {
+  font-size: 0.9rem;
+  color: #59636e;
+  margin: -0.25rem 0 0 0;
+}
+
+.images-container {
+  max-width: 80%;
+  height: 25rem;
+  margin: 0 auto;
+}
+
+.images-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.images-options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.images-options button {
+  background-color: var(--default-button-background);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.images-options button:hover,
+.form-cancel-button:hover {
+  cursor: pointer;
+  background-color: var(--default-button-hover-background);
+}
+
+.images-options button:active,
+.form-cancel-button:active {
+  background-color: var(--default-button-background);
+}
+
+.images-options button:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.images-options .material-symbols-outlined {
+  font-size: 2.5rem;
+}
+
+.images-options .arrow-back {
+  margin-left: 0.35rem;
+  margin-top: 0.1rem;
+}
+
+.images-options .arrow-forward {
+  margin-left: 0.15rem;
+  margin-top: 0.15rem;
+}
+
+.download-button {
+  display: block;
+  font-size: 1rem;
+  background-color: #dae4ba;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 1.5rem auto 0.5rem auto;
+}
+
+.download-button:hover {
+  cursor: pointer;
+  background-color: #ccd5ae;
+}
+
+.download-button:active {
+  background-color: #dae4ba;
+}
+
+@media (min-width: 500px) {
+  .upload-date {
+    position: absolute;
+    top: -0.25rem;
+    right: 0rem;
+    margin: 1rem;
+  }
+}
