@@ -55,6 +55,14 @@ class Folder {
   }
 
   async deleteFolder(folderId) {
+    await prisma.share.deleteMany({
+      where: {
+        folderId: {
+          equals: Number(folderId),
+        },
+      },
+    });
+
     await prisma.folder.delete({
       where: {
         id: Number(folderId),
