@@ -55,6 +55,14 @@ h2 {
   display: flex !important;
 }
 
+.post-li h2 a {
+  color: #0969da;
+}
+
+.post-li h2 a:hover {
+  text-decoration: underline;
+}
+
 .list li,
 .end-li {
   position: relative;
@@ -149,7 +157,7 @@ h2 {
   margin-top: 0.15rem;
 }
 
-.delete-button {
+.list-options {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -216,18 +224,21 @@ h2 {
   padding: 0.5rem 1rem;
 }
 
-.form-share-button {
+.form-share-button,
+.folders-list .list-options > *:not(:last-child) {
   background-color: #dae4ba;
   border: none;
   border-radius: 5px;
 }
 
-.form-share-button:hover {
+.form-share-button:hover,
+.folders-list .list-options > *:not(:last-child):hover {
   cursor: pointer;
   background-color: #ccd5ae;
 }
 
-.form-share-button:active {
+.form-share-button:active,
+.folders-list .list-options > *:not(:last-child):active {
   background-color: #dae4ba;
 }
 
@@ -237,4 +248,27 @@ h2 {
   border: none;
   border-radius: 5px;
   padding: 0.5rem 3rem 0.5rem 1rem;
+}
+
+.folders-list .list-options > * {
+  margin-right: 0.5rem;
+}
+
+.folders-list .list-options > *:not(:last-child) {
+  padding: 0.25rem 0.5rem;
+}
+
+.folders-list .list-options a {
+  display: inline-block;
+}
+
+.folder-detail {
+  font-size: 0.9rem;
+  color: #59636e;
+  margin: 0;
+}
+
+.folder-detail span:not(:last-child)::after {
+  content: " · ";
+  margin: 0 0.25rem;
 }

@@ -1,4 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
+import { format } from "date-fns";
 import { requiredErr, lengthErr } from "../utils.js";
 import { folderDb } from "../db/Folder.js";
 
@@ -14,10 +15,15 @@ const validateFolderForm = [
 
 const getAllFolders = async (req, res) => {
   const folders = await folderDb.getAllFolders();
+  const formattedFolders = folders.map((folder) => {
+    return { ...folder, date: format(folder.date, "PP") };
+  });
 
-  res.render("list", {
+  res.render("layout", {
+    title: "All folders",
+    path: "partials/list.ejs",
     subject: "folders",
-    items: folders,
+    items: formattedFolders,
   });
 };
 

@@ -2,7 +2,12 @@ import { prisma } from "./clients.js";
 
 class Folder {
   async getAllFolders() {
-    const folders = await prisma.folder.findMany();
+    const folders = await prisma.folder.findMany({
+      include: {
+        posts: true,
+        shares: true,
+      },
+    });
 
     return folders;
   }
