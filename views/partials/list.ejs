@@ -13,7 +13,7 @@
   <% if (items.length > 0) { %>
     <ul>
       <% items.forEach((item) => { %>
-        <li class="post-li">
+        <li class="post-li"  data-id="<%=item.id%>">
           <h2><a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a></h2>
           <% if (subject === "posts") { %>
             <div class="images-container">
@@ -36,7 +36,7 @@
           <% } else { %>
             <p class="folder-detail">
               <span><%=item.posts.length%> posts</span>
-              <span><%=item.shares.length%> shares</span>
+              <span><span class="share-count"><%=item.shares.length%></span> shares</span>
               <span><%=item.date%></span>
             </p>
           <% } %>
@@ -102,7 +102,10 @@
   </div>
 </form>
 <div class="link-container hidden">
-  <h1>Here is your link</h1>
+  <h1>Here is your link!</h1>
   <p class="link-para"></p>
+  <div class="button-options">
+    <button type="button" class="link-dismiss-button">Dismiss</button>
+  </div>
 </div>
 <div class="overlay hidden"></div>

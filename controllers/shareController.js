@@ -38,7 +38,6 @@ const getShareFolder = async (req, res, next) => {
 const postShareFolder = [
   validateShareForm,
   async (req, res, next) => {
-    console.log(req.body); // HELLO!
     const { folderId } = req.params;
     const errors = validationResult(req);
 

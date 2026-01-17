@@ -38,7 +38,8 @@ h2 {
 
 .post-li,
 .delete-form,
-.share-form {
+.share-form,
+.link-container {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -187,7 +188,8 @@ h2 {
 /* afterwards do mobile styling */
 
 .delete-form,
-.share-form {
+.share-form,
+.link-container {
   position: fixed;
   top: 45%;
   left: 50%;
@@ -202,7 +204,8 @@ h2 {
 }
 
 .delete-form h1,
-.share-form h1 {
+.share-form h1,
+.link-container h1 {
   margin: 0 0 1rem 0;
 }
 
@@ -219,12 +222,14 @@ h2 {
 
 .form-cancel-button,
 .form-delete-button,
-.form-share-button {
+.form-share-button,
+.link-dismiss-button {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
 
 .form-share-button,
+.link-dismiss-button,
 .folders-list .list-options > *:not(:last-child) {
   background-color: #dae4ba;
   border: none;
@@ -232,14 +237,22 @@ h2 {
 }
 
 .form-share-button:hover,
+.link-dismiss-button:hover,
 .folders-list .list-options > *:not(:last-child):hover {
   cursor: pointer;
   background-color: #ccd5ae;
 }
 
 .form-share-button:active,
+.link-dismiss-button:active,
 .folders-list .list-options > *:not(:last-child):active {
   background-color: #dae4ba;
+}
+
+.link-container p {
+  background-color: #ebecee;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
 }
 
 #duration {
@@ -248,6 +261,10 @@ h2 {
   border: none;
   border-radius: 5px;
   padding: 0.5rem 3rem 0.5rem 1rem;
+}
+
+#duration:hover {
+  background-color: #dddddd;
 }
 
 .folders-list .list-options > * {

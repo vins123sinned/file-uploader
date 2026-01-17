@@ -7,13 +7,19 @@ const deleteButtons = document.querySelectorAll(".delete-button");
 const deleteForm = document.querySelector(".delete-form");
 const linkContainer = document.querySelector(".link-container");
 const linkPara = document.querySelector(".link-para");
+const linkDismissButton = document.querySelector(".link-dismiss-button");
 const formCancelButtons = document.querySelectorAll(".form-cancel-button");
 const overlay = document.querySelector(".overlay");
 
+let currentShareLi = undefined;
+
+// arrow slideshow functionality for list posts view
 posts.forEach((post) => {
   const images = post.querySelectorAll("img");
   const arrowBack = post.querySelector(".arrow-back-button");
   const arrowForward = post.querySelector(".arrow-forward-button");
+
+  if (!arrowBack) return;
 
   if (images.length === 1) {
     // only one image, so disable image slider
@@ -28,8 +34,6 @@ posts.forEach((post) => {
       position--;
       if (position === -1) position = images.length - 1;
 
-      console.log(position);
-      console.log(images[position]);
       images[position].classList.remove("hidden");
     });
     arrowForward.addEventListener("click", () => {
@@ -43,6 +47,7 @@ posts.forEach((post) => {
   }
 });
 
+// handles and sets up the hidden forms
 deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
     const actionLink = `/${deleteButton.dataset.subject}/delete/${deleteButton.dataset.id}`;
@@ -73,14 +78,19 @@ shareButtons.forEach((shareButton) => {
       shareForm.setAttribute("action", actionLink);
       shareForm.classList.remove("hidden");
       overlay.classList.remove("hidden");
+      currentShareLi = document.querySelector(
+        `.post-li[data-id="${shareButton.dataset.id}"]`,
+      );
     } else {
       shareForm.setAttribute("action", "");
       shareForm.classList.add("hidden");
       overlay.classList.add("hidden");
+      currentShareLi = undefined;
     }
   });
 });
 
+// share form submit functionality
 shareFormSubmit.addEventListener("click", async () => {
   if (shareForm.getAttribute("action") === "") return;
 
@@ -97,16 +107,21 @@ shareFormSubmit.addEventListener("click", async () => {
     }
 
     const result = await response.json();
+    const shareCount = currentShareLi.querySelector(".share-count");
     showShareLink(result);
+    shareCount.textContent = `${Number(shareCount.textContent) + 1}`;
   } catch (err) {
     shareFormError.textContent = `An error has occurred. Please try again.`;
     console.error(err.message);
   }
 });
 
+// buttons that hides the overlay and forms when clicked
 formCancelButtons.forEach((cancelButton) => {
   cancelButton.addEventListener("click", hideForms);
 });
+
+linkDismissButton.addEventListener("click", hideForms);
 
 overlay.addEventListener("click", hideForms);
 
@@ -116,6 +131,9 @@ function hideForms() {
   shareForm.setAttribute("action", "");
   deleteForm.classList.add("hidden");
   deleteForm.setAttribute("action", "");
+  linkContainer.classList.add("hidden");
+  shareFormError.textContent = "";
+  currentShareLi = undefined;
 }
 
 function showShareLink(result) {
