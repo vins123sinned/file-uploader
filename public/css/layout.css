@@ -68,7 +68,8 @@ a {
   display: none !important;
 }
 
-button:disabled {
+button:disabled,
+a .disabled {
   pointer-events: none;
   opacity: 0.3;
 }

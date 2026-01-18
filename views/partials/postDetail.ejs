@@ -10,7 +10,7 @@
   </div>
   <div class="images-container">
     <% post.files.forEach((file, index) => { %>
-      <img src="<%=file.url%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=post.name%> image">
+      <img src="<%=file.url%>" data-filename="<%=file.name%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=post.name%> image">
     <% }); %>
     <div class="images-options hidden">
       <button class="arrow-back-button" aria-label="Previous image">
@@ -25,5 +25,5 @@
       </button>
     </div>
   </div>
-  <button class="download-button" type="button">Download</button>
+  <a class="download-link" href="" download="">Download</a>
 </div>

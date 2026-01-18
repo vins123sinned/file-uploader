@@ -36,7 +36,7 @@ const uploadFiles = async (files) => {
             contentType: file.mimetype,
           });
 
-        if (error) throw error;
+        if (error) throw new Error("Error with uploading an image");
 
         // return url
         const { data: image } = supabase.storage

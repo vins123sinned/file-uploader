@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  downloadFile,
   getAllFiles,
   getFile,
   postDeleteFile,
@@ -9,6 +10,7 @@ import { checkUser } from "../utils.js";
 const fileRouter = Router();
 
 fileRouter.get("/", getAllFiles);
+fileRouter.get("/download/:filename", downloadFile);
 fileRouter.post("/delete/:fileId", checkUser, postDeleteFile);
 fileRouter.get("/:fileId", getFile);
 

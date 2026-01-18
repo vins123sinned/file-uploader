@@ -1,4 +1,5 @@
 import { fileDb } from "../db/File.js";
+import { supabase } from "../db/clients.js";
 
 const getAllFiles = async (req, res) => {
   const files = await fileDb.getAllFiles();
@@ -18,6 +19,26 @@ const getFile = async (req, res) => {
   });
 };
 
+const downloadFile = async (req, res, next) => {
+  const { filename } = req.params;
+
+  try {
+    const { data: blob, error } = await supabase.storage
+      .from("image")
+      .download(filename);
+
+    if (error) throw Error("Error with downloading the image requested");
+
+    // convert Blob to Buffer so Node.js can understand and use it
+    const arrayBuffer = await blob.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    res.type(blob.type).send(buffer);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const postDeleteFile = async (req, res, next) => {
   const { fileId } = req.params;
 
@@ -29,4 +50,4 @@ const postDeleteFile = async (req, res, next) => {
   }
 };
 
-export { getAllFiles, getFile, postDeleteFile };
+export { getAllFiles, getFile, downloadFile, postDeleteFile };
