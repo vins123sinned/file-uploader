@@ -86,7 +86,7 @@
   <% } %>
 </section>
 <form action="" method="POST" class="delete-form hidden">
-  <h1>Delete form?</h1>
+  <h1>Delete <%= subject === "folders" ? "folder" : "post" %>?</h1>
   <p>This action cannot be undone, so please proceed with caution.</p>
   <div class="button-options">
     <button type="button" class="form-cancel-button">Cancel</button>
@@ -94,7 +94,7 @@
   </div>
 </form>
 <form action="<%= locals.action %>" method="POST" class="share-form <%= locals.errors ? "" : "hidden" %>">
-  <h1>Share folder</h1>
+  <h1>Share folder?</h1>
   <span class="error share-form-error" role="alert" aria-live="polite">
     <%= locals.errors?.find((error) => error.path === "duration")?.msg %>
   </span>

@@ -10,13 +10,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_box,add_2,arrow_back_ios,arrow_forward_ios,chat,delete,edit,folder,login,logout,menu,share" />
   <% if (path === "partials/login.ejs" || path === "partials/signup.ejs") { %>
     <link rel="stylesheet" href="/css/authentication-form.css">
-  <% } else if (path === "partials/list.ejs") { %>
+  <% } else if (path === "partials/list.ejs" || path === "partials/folderDetail.ejs") { %>
     <script src="/js/list.js" defer></script>
     <link rel="stylesheet" href="/css/list.css">
   <% } else if (path === "partials/postDetail.ejs") { %>
     <script src="/js/postDetail.js" defer></script>
     <link rel="stylesheet" href="/css/postDetail.css">
-  <% } %>
+  <% }%>
 </head>
 <body>
   <%- include('partials/navbar.ejs'); %>
