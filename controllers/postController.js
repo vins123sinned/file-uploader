@@ -82,11 +82,14 @@ const getPost = async (req, res) => {
 };
 
 const getPostForm = async (req, res) => {
+  // sets folder input in uploadForm to the folder the user was on (folder list)
+  const { folderId } = req.query;
   const folders = await folderDb.getAllFolders();
 
   res.render("uploadForm", {
     title: "Upload post",
     folders: folders,
+    folderId: folderId,
   });
 };
 
@@ -112,7 +115,11 @@ const postPostForm = [
       const fileIds = await uploadFiles(req.files);
 
       await postDb.insertPost(name, fileIds, folderId);
-      res.redirect("/posts");
+      if (folderId) {
+        res.redirect(`/folders/${folderId}`);
+      } else {
+        res.redirect("/posts");
+      }
     } catch (err) {
       return next(err);
     }

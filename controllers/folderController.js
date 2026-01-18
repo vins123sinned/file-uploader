@@ -32,7 +32,9 @@ const getFolder = async (req, res) => {
   const folder = await folderDb.getFolder(folderId);
   const posts = await folderDb.getAllPosts(folderId);
 
-  res.render("folderDetail", {
+  res.render("layout", {
+    title: folder.name,
+    path: "partials/folderDetail.ejs",
     folder: folder,
     posts: posts,
   });

@@ -29,6 +29,9 @@ class Folder {
           equals: Number(folderId),
         },
       },
+      include: {
+        files: true,
+      },
     });
 
     return posts;
