@@ -52,9 +52,9 @@ deleteButtons.forEach((deleteButton) => {
   deleteButton.addEventListener("click", () => {
     let actionLink;
     if (deleteButton.dataset.folderId) {
-      actionLink = `/${deleteButton.dataset.subject}/delete?folderId=${folderId}`;
+      actionLink = `/${deleteButton.dataset.subject}/delete/${deleteButton.dataset.id}?folderId=${deleteButton.dataset.folderId}`;
     } else {
-      actionLink = `/${deleteButton.dataset.subject}/delete`;
+      actionLink = `/${deleteButton.dataset.subject}/delete/${deleteButton.dataset.id}`;
     }
     console.log(actionLink);
 

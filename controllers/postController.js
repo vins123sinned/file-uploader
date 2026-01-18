@@ -127,12 +127,17 @@ const postPostForm = [
 ];
 
 const postDeletePost = async (req, res, next) => {
+  const { folderId } = req.query;
   const { postId } = req.params;
 
   try {
     await deleteAllFiles(postId);
     await postDb.deletePost(postId);
-    res.redirect("/posts");
+    if (folderId) {
+      res.redirect(`/folders/${folderId}`);
+    } else {
+      res.redirect("/posts");
+    }
   } catch (err) {
     return next(err);
   }
