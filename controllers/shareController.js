@@ -26,7 +26,9 @@ const getShareFolder = async (req, res, next) => {
 
     const folder = await folderDb.getFolder(sharedFolder.folderId);
     const posts = await folderDb.getAllPosts(sharedFolder.folderId);
-    res.render("folderDetail", {
+    res.render("layout", {
+      title: `${folder.name} (Shared)`,
+      path: "partials/folderDetail.ejs",
       folder: folder,
       posts: posts,
     });

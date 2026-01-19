@@ -18,6 +18,6 @@ folderRouter.post("/create", checkUser, postFolderForm);
 folderRouter.get("/edit/:folderId", checkUser, getEditForm);
 folderRouter.post("/edit/:folderId", checkUser, postEditForm);
 folderRouter.post("/delete/:folderId", checkUser, postDeleteFolder);
-folderRouter.get("/:folderId", getFolder);
+folderRouter.get("/:folderId", checkUser, getFolder);
 
 export { folderRouter };
