@@ -1,0 +1,45 @@
+<form action="/posts/create" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
+  <h1><%= title %></h1>
+  <section>
+    <p>
+      <label for="name">Name</label>
+      <input class="name-input" type="text" name="name" id="name" maxlength="255" value="<%= locals.previousValues?.name %>" required>
+      <span class="error" role="alert" aria-live="polite">
+        <%= locals.errors?.find((error) => error.path === "name")?.msg %>
+      </span>
+    </p>
+    <p>
+      <label for="images">
+        Images
+      </label>
+      <span class="images-previews"></span>
+      <label class="images-label" for="images">
+        Add images
+        <span class="files-counter">
+          (<span class="file-count">0</span>/8 files)
+        </span>
+      </label>
+      <input class="images-input" type="file" name="images" id="images" multiple="true" accept="image/png, image/jpeg" required>
+      <span class="error file-input-error" role="alert" aria-live="polite">
+        <%= locals.errors?.find((error) => error.path === "images")?.msg %>
+      </span>
+    </p>
+    <p>
+      <label for="folder-select">Folder</label>
+      <select class="select-input" name="folderId" id="folder-select">
+        <option value="">-- None --</option>
+        <% folders.forEach((folder) => { %>
+          <option value="<%=folder.id%>" <%= (locals.previousValues?.folderId === String(folder.id) || locals.folderId === String(folder.id)) ? "selected" : "" %>>
+            <%=folder.name%>
+          </option>
+        <% }) %>
+      </select>
+      <span class="error" role="alert" aria-live="polite">
+        <%= locals.errors?.find((error) => error.path === "folder")?.msg %>
+      </span>
+    </p>
+  </section>
+  <section>
+    <button class="submit-button" type="submit">Upload</button>
+  </section>
+</form>

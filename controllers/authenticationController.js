@@ -54,6 +54,8 @@ const validateSignUp = [
 ];
 
 const getLogIn = (req, res) => {
+  if (res.locals.currentUser) return res.redirect("/");
+
   res.render("layout", {
     title: "Log in",
     path: "partials/login.ejs",
@@ -91,6 +93,8 @@ passport.authenticate("local", {
 });
 
 const getSignUp = (req, res) => {
+  if (res.locals.currentUser) return res.redirect("/");
+
   res.render("layout", {
     title: "Sign up",
     path: "partials/signup.ejs",

@@ -86,8 +86,9 @@ const getPostForm = async (req, res) => {
   const { folderId } = req.query;
   const folders = await folderDb.getAllFolders();
 
-  res.render("uploadForm", {
+  res.render("layout", {
     title: "Upload post",
+    path: "partials/uploadForm.ejs",
     folders: folders,
     folderId: folderId,
   });
@@ -101,8 +102,9 @@ const postPostForm = [
     if (!errors.isEmpty()) {
       const folders = await folderDb.getAllFolders();
 
-      return res.status(400).render("uploadForm", {
+      return res.status(400).render("layout", {
         title: "Upload post",
+        path: "partials/uploadForm.ejs",
         folders: folders,
         previousValues: req.body,
         errors: errors.array(),

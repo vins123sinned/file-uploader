@@ -60,6 +60,7 @@ a {
 }
 
 .error {
+  display: block;
   margin-top: 0.25rem;
   color: #ce2b2b;
 }
