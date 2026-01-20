@@ -71,6 +71,13 @@ button {
 
 .images-container {
   text-align: center;
+  height: 12.5rem;
+}
+
+.images-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .images-previews:hover .images-options {
@@ -81,12 +88,11 @@ button {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: 46%;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
 }
 
 .images-options button {
@@ -118,7 +124,7 @@ button {
 }
 
 .images-options .arrow-forward {
-  margin-left: 0.15rem;
+  margin-left: 0.1rem;
   margin-top: 0.025rem;
 }
 
@@ -136,4 +142,10 @@ button {
 .submit-button:hover {
   cursor: pointer;
   background-color: #1c8139;
+}
+
+@media (min-width: 530px) {
+  .images-options {
+    padding: 0 1.5rem;
+  }
 }
