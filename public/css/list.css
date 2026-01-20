@@ -143,15 +143,17 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 80%;
   padding: 0 2rem;
+  margin: 0 auto;
 }
 
 .images-options button {
   background-color: var(--default-button-background);
   border: none;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .images-options button:hover,
@@ -166,17 +168,16 @@ h2 {
 }
 
 .images-options .material-symbols-outlined {
-  font-size: 2.5rem;
+  font-size: 1.25rem;
 }
 
 .images-options .arrow-back {
-  margin-left: 0.35rem;
-  margin-top: 0.1rem;
+  margin-left: 0.15rem;
+  margin-top: 0.05rem;
 }
 
 .images-options .arrow-forward {
-  margin-left: 0.15rem;
-  margin-top: 0.15rem;
+  margin-top: 0.05rem;
 }
 
 .list-options {

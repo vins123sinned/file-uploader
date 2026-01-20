@@ -64,6 +64,64 @@ button {
   display: none;
 }
 
+.images-previews {
+  position: relative;
+  height: 12.5rem;
+}
+
+.images-container {
+  text-align: center;
+}
+
+.images-previews:hover .images-options {
+  display: flex;
+}
+
+.images-options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.images-options button {
+  background-color: var(--default-button-background);
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.25rem !important;
+}
+
+.images-options button:hover,
+.form-cancel-button:hover {
+  cursor: pointer;
+  background-color: var(--default-button-hover-background);
+}
+
+.images-options button:active,
+.form-cancel-button:active {
+  background-color: var(--default-button-background);
+}
+
+.images-options .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.images-options .arrow-back {
+  margin-left: 0.15rem;
+}
+
+.images-options .arrow-forward {
+  margin-left: 0.15rem;
+  margin-top: 0.025rem;
+}
+
 .submit-button {
   font-size: 0.9rem;
   font-weight: 500;

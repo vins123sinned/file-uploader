@@ -2,9 +2,11 @@ const fileInput = document.querySelector("#images");
 const fileInputError = document.querySelector(".file-input-error");
 const fileCountSpan = document.querySelector(".file-count");
 const imagesPreviews = document.querySelector(".images-previews");
+const imagesContainer = document.querySelector(".images-container");
+const imagesOptions = document.querySelector(".images-options");
 
 async function fileChange() {
-  imagesPreviews.replaceChildren();
+  imagesContainer.replaceChildren();
   // start with no errors. If there is an error, it will be written!
   fileInputError.classList.remove("invalid");
   fileInputError.textContent = "";
@@ -15,12 +17,13 @@ async function fileChange() {
 }
 
 function showImagesPreviews() {
-  Array.from(fileInput.files).forEach((file) => {
+  Array.from(fileInput.files).forEach((file, index) => {
     const image = document.createElement("img");
     image.alt = `Preview image of ${file.name}`;
     image.height = "200";
     image.src = URL.createObjectURL(file);
-    imagesPreviews.appendChild(image);
+    if (index !== 0) image.classList.add("hidden");
+    imagesContainer.appendChild(image);
   });
 }
 

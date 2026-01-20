@@ -13,7 +13,7 @@
   <% if (items.length > 0) { %>
     <ul>
       <% items.forEach((item) => { %>
-        <li class="post-li"  data-id="<%=item.id%>">
+        <li class="post-li" data-id="<%=item.id%>">
           <div class="post-title">
             <h2>
               <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
@@ -30,12 +30,12 @@
                 <img src="<%=file.url%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=item.name%> image">
               <% }); %>
               <div class="images-options hidden">
-                <button class="arrow-back-button" aria-label="Previous image">
+                <button type="button" class="arrow-back-button" aria-label="Previous image">
                   <span class="material-symbols-outlined arrow-back">
                     arrow_back_ios
                   </span>
                 </button>
-                <button class="arrow-forward-button" aria-label="Next image">
+                <button type="button" class="arrow-forward-button" aria-label="Next image">
                   <span class="material-symbols-outlined arrow-forward">
                     arrow_forward_ios
                   </span>
