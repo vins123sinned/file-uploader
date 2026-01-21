@@ -18,7 +18,7 @@
         <% } else { %>
           <%- include("components/lists/folderLi.ejs",  { item: item, subject: subject }); %>
         <% } %>
-      <% }) %>
+      <% }); %>
       <%- include("components/lists/endLi.ejs"); %>
     <% } else { %>
       <%- include("components/lists/emptyListLi.ejs", { link: `/${subject}/create`, subject: subject }); %>

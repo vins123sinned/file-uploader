@@ -1,28 +1,40 @@
-<h1>Hola</h1>
 <% if (!locals.currentUser) { %>
   <h1>Welcome to Alimenté!</h1>
 <% } else { %>
   <h1>Welcome back to Alimenté!</h1>
 <% } %>
 <section class="posts">
-  <% if (items.length > 0) { %>
-    <ul></ul>
-  <% } %>
+  <h2>Recent Posts</h2>
+  <ul>
+    <% if (posts.length > 0) { %>
+      <% posts.forEach((post) => { %>
+        <%- include("components/lists/postLi.ejs", { item: post, subject: "posts" }); %>
+      <% }); %>
+      <%- include("components/lists/endLi.ejs"); %>
+    <% } else { %>
+      <%- include("components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
+    <% } %>
+  </ul>
 </section>
-<section class="folders">
-
-</section>
-<section class="sidebar-announcement">
-
-</section>
-<% if (!locals.currentUser) { %>
-  <a href="/login">Log In NOW!</a>
-  <a href="/signup">Or sign up please ❤️</a>
-<% } else { %>
-  <h1>Welcome, <%= currentUser.email %></h1>
-  <a href="/posts/create">Upload post</a>
-  <a href="/folders">All folders</a>
-  <a href="/posts">All posts</a>
-  <a href="/folders/create">Create folder</a>
-  <a href="/logout">Log out</a>
-<% } %>
+<div class="sidebar-right">
+  <section class="folders">
+    <h2>Folders</h2>
+    <ul>
+      <% if (folders.length > 0) { %>
+        <% folders.forEach((folder) => { %>
+          <%- include("components/lists/folderLi.ejs", { item: folder, subject: "folders" }); %>
+        <% }); %>
+        <%- include("components/lists/endLi.ejs"); %>
+      <% } else { %>
+        <%- include("components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
+      <% } %>
+    </ul>
+  </section>
+  <section class="sidebar-announcement">
+    <h2>Announcement</h2>
+    <p>Attention all foodies! Thank you for using Alimenté as the site to peruse all your favorite foods. For our 4th anniversary, 
+      join us as we give out new prizes and explore the vast culinary landscape together. Thank you again and have a wonderful day!</p>
+    <img>
+    <div class="placeholder-image"></div>
+  </section>
+</div>
