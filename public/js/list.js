@@ -118,7 +118,7 @@ if (shareForm) {
       showShareLink(result);
       shareCount.textContent = `${Number(shareCount.textContent) + 1}`;
     } catch (err) {
-      shareFormError.textContent = `An error has occurred. Please try again.`;
+      shareFormError.textContent = `The selected option's value is invalid. Please try again later.`;
       console.error(err.message);
     }
   });

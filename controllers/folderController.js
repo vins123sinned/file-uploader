@@ -41,8 +41,9 @@ const getFolder = async (req, res) => {
 };
 
 const getFolderForm = (req, res) => {
-  res.render("folderForm", {
-    title: "Create a folder",
+  res.render("layout", {
+    title: "Create folder",
+    path: "partials/folderForm.ejs",
     action: "/folders/create",
   });
 };

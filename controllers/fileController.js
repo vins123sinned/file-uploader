@@ -1,24 +1,6 @@
 import { fileDb } from "../db/File.js";
 import { supabase } from "../db/clients.js";
 
-const getAllFiles = async (req, res) => {
-  const files = await fileDb.getAllFiles();
-
-  res.render("list", {
-    subject: "files",
-    items: files,
-  });
-};
-
-const getFile = async (req, res) => {
-  const { fileId } = req.params;
-  const file = await fileDb.getFile(fileId);
-
-  res.render("fileDetail", {
-    file: file,
-  });
-};
-
 const downloadFile = async (req, res, next) => {
   const { filename } = req.params;
 
@@ -50,4 +32,4 @@ const postDeleteFile = async (req, res, next) => {
   }
 };
 
-export { getAllFiles, getFile, downloadFile, postDeleteFile };
+export { downloadFile, postDeleteFile };

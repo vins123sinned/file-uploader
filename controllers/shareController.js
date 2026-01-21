@@ -46,8 +46,9 @@ const postShareFolder = [
     if (!errors.isEmpty()) {
       const folders = await folderDb.getAllFolders();
 
-      return res.status(400).render("list", {
+      return res.status(400).render("layout", {
         title: "All folders",
+        path: "partials/list.ejs",
         action: `/share/${folderId}`,
         subject: "folders",
         items: folders,

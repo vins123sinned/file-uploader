@@ -144,6 +144,10 @@ button {
   background-color: #1c8139;
 }
 
+.submit-button:active {
+  background-color: #1f883d;
+}
+
 @media (min-width: 530px) {
   .images-options {
     padding: 0 1.5rem;
