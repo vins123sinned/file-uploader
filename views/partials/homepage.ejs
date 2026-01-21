@@ -1,0 +1,28 @@
+<h1>Hola</h1>
+<% if (!locals.currentUser) { %>
+  <h1>Welcome to Alimenté!</h1>
+<% } else { %>
+  <h1>Welcome back to Alimenté!</h1>
+<% } %>
+<section class="posts">
+  <% if (items.length > 0) { %>
+    <ul></ul>
+  <% } %>
+</section>
+<section class="folders">
+
+</section>
+<section class="sidebar-announcement">
+
+</section>
+<% if (!locals.currentUser) { %>
+  <a href="/login">Log In NOW!</a>
+  <a href="/signup">Or sign up please ❤️</a>
+<% } else { %>
+  <h1>Welcome, <%= currentUser.email %></h1>
+  <a href="/posts/create">Upload post</a>
+  <a href="/folders">All folders</a>
+  <a href="/posts">All posts</a>
+  <a href="/folders/create">Create folder</a>
+  <a href="/logout">Log out</a>
+<% } %>

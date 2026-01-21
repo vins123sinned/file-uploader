@@ -10,89 +10,22 @@
       </a>
     </p>
   </div>
-  <% if (items.length > 0) { %>
-    <ul>
+  <ul>
+    <% if (items.length > 0) { %>
       <% items.forEach((item) => { %>
-        <li class="post-li" data-id="<%=item.id%>">
-          <div class="post-title">
-            <h2>
-              <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
-            </h2>
-            <% if (item.folderName) { %>
-              <p class="post-folder">
-                <a href="/folders/<%=item.folderId%>"><%=item.folderName%></a>
-              </p>
-            <% } %>
-          </div>
-          <% if (subject === "posts") { %>
-            <div class="images-container">
-              <% item.files.forEach((file, index) => { %>
-                <img src="<%=file.url%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=item.name%> image">
-              <% }); %>
-              <div class="images-options hidden">
-                <button type="button" class="arrow-back-button" aria-label="Previous image">
-                  <span class="material-symbols-outlined arrow-back">
-                    arrow_back_ios
-                  </span>
-                </button>
-                <button type="button" class="arrow-forward-button" aria-label="Next image">
-                  <span class="material-symbols-outlined arrow-forward">
-                    arrow_forward_ios
-                  </span>
-                </button>
-              </div>
-            </div>
-          <% } else { %>
-            <p class="folder-detail">
-              <span><%=item.posts.length%> posts</span>
-              <span><span class="share-count"><%=item.shares.length%></span> shares</span>
-              <span><%=item.date%></span>
-            </p>
-          <% } %>
-          <div class="list-options hidden">
-            <% if (subject === "folders") { %>
-              <a href="/<%=subject%>/edit/<%=item.id%>">
-                <span class="material-symbols-outlined">
-                  edit
-                </span>
-              </a>
-              <button type="button" class="share-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
-                <span class="material-symbols-outlined">
-                  share
-                </span>
-              </button>
-            <% } %>
-            <button type="button" class="delete-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
-              <span class="material-symbols-outlined">
-                delete
-              </span>
-            </button>
-          </div>
-        </li>
+        <% if (subject === "posts") { %>
+          <%- include("components/lists/postLi.ejs", { item: item, subject: subject }); %>
+        <% } else { %>
+          <%- include("components/lists/folderLi.ejs",  { item: item, subject: subject }); %>
+        <% } %>
       <% }) %>
-      <li class="end-li">
-        <p>
-          <span>End of list</span>
-        </p>
-      </li>
-    </ul>
-  <% } else { %>
-    <p>
-      No <%=subject%> yet!
-      <a href="/<%=subject%>/create">
-        Add one today!
-      </a>
-    </p>
-  <% } %>
+      <%- include("components/lists/endLi.ejs"); %>
+    <% } else { %>
+      <%- include("components/lists/emptyListLi.ejs", { link: `/${subject}/create`, subject: subject }); %>
+    <% } %>
+  </ul>
 </section>
-<form action="" method="POST" class="delete-form hidden">
-  <h1>Delete <%= subject === "folders" ? "folder" : "post" %>?</h1>
-  <p>This action cannot be undone, so please proceed with caution.</p>
-  <div class="button-options">
-    <button type="button" class="form-cancel-button">Cancel</button>
-    <button type="submit" class="form-delete-button">Delete</button>
-  </div>
-</form>
+<%- include("components/forms/deleteForm.ejs", { subject: subject }); %>
 <form action="<%= locals.action %>" method="POST" class="share-form <%= locals.errors ? "" : "hidden" %>">
   <h1>Share folder?</h1>
   <span class="error share-form-error" role="alert" aria-live="polite">

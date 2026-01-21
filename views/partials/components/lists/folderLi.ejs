@@ -1,0 +1,31 @@
+<li class="post-li" data-id="<%=item.id%>">
+  <div class="post-title">
+    <h2>
+      <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
+    </h2>
+  </div>
+  <div>
+    <p class="folder-detail">
+      <span><%=item.posts.length%> posts</span>
+      <span><span class="share-count"><%=item.shares.length%></span> shares</span>
+      <span><%=item.date%></span>
+    </p>
+  </div>
+  <div class="list-options hidden">
+    <a href="/<%=subject%>/edit/<%=item.id%>">
+      <span class="material-symbols-outlined">
+        edit
+      </span>
+    </a>
+    <button type="button" class="share-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
+      <span class="material-symbols-outlined">
+        share
+      </span>
+    </button>
+    <button type="button" class="delete-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
+      <span class="material-symbols-outlined">
+        delete
+      </span>
+    </button>
+  </div>
+</li>

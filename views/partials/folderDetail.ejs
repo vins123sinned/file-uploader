@@ -10,67 +10,16 @@
       </a>
     </p>
   </div>
-  <% if (posts.length > 0) { %>
-    <ul>
-      <% posts.forEach((post) => { %>
-        <li class="post-li" data-id="<%=post.id%>">
-          <div class="post-title">
-            <h2>
-              <a href="/posts/<%=post.id%>"><%= post.name %></a>
-            </h2>
-            <% if (post.folderId) { %>
-              <p class="post-folder">
-                <a href="/folders/<%=post.folderId%>"><%=folder.name%></a>
-              </p>
-            <% } %>
-          </div>
-          <div class="images-container">
-            <% post.files.forEach((file, index) => { %>
-              <img src="<%=file.url%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=post.name%> image">
-            <% }); %>
-            <div class="images-options hidden">
-              <button class="arrow-back-button" aria-label="Previous image">
-                <span class="material-symbols-outlined arrow-back">
-                  arrow_back_ios
-                </span>
-              </button>
-              <button class="arrow-forward-button" aria-label="Next image">
-                <span class="material-symbols-outlined arrow-forward">
-                  arrow_forward_ios
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="list-options hidden">
-            <button type="button" class="delete-button" data-id="<%=post.id%>" data-subject="posts" data-folder-id="<%=post.folderId%>">
-              <span class="material-symbols-outlined">
-                delete
-              </span>
-            </button>
-          </div>
-        </li>
-      <% }) %>
-      <li class="end-li">
-        <p>
-          <span>End of list</span>
-        </p>
-      </li>
-    </ul>
-  <% } else { %>
-    <p>
-      No posts yet!
-      <a href="/posts/create?folderId=<%=folder.id%>">
-        Add one today!
-      </a>
-    </p>
-  <% } %>
+  <ul>
+    <% if (posts.length > 0) { %>
+        <% posts.forEach((post) => { %>
+          <%- include("components/lists/postLi.ejs", { item: post, subject: "folders" }); %>
+        <% }) %>
+        <%- include("components/lists/endLi.ejs"); %>
+    <% } else { %>
+      <%- include("components/lists/emptyListLi.ejs", { link: `/posts/create?folderId=${folder.id}`, subject: "folders" }); %>
+    <% } %>
+  </ul>
 </section>
-<form action="" method="POST" class="delete-form hidden">
-  <h1>Delete post?</h1>
-  <p>This action cannot be undone, so please proceed with caution.</p>
-  <div class="button-options">
-    <button type="button" class="form-cancel-button">Cancel</button>
-    <button type="submit" class="form-delete-button">Delete</button>
-  </div>
-</form>
+<%- include("components/forms/deleteForm.ejs", { subject: "posts" }); %>
 <div class="overlay hidden"></div>

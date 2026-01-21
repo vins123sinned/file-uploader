@@ -1,0 +1,36 @@
+<li class="post-li" data-id="<%=item.id%>">
+  <div class="post-title">
+    <h2>
+      <a href="/<%=subject%>/<%=item.id%>"><%= item.name %></a>
+    </h2>
+    <% if (item.folderName) { %>
+      <p class="post-folder">
+        <a href="/folders/<%=item.folderId%>"><%=item.folderName%></a>
+      </p>
+    <% } %>
+  </div>
+  <div class="images-container">
+    <% item.files.forEach((file, index) => { %>
+      <img src="<%=file.url%>" class="<%=index !== 0 ? "hidden" : ""%>" width="900" height="400" alt="<%=item.name%> image">
+    <% }); %>
+    <div class="images-options hidden">
+      <button type="button" class="arrow-back-button" aria-label="Previous image">
+        <span class="material-symbols-outlined arrow-back">
+          arrow_back_ios
+        </span>
+      </button>
+      <button type="button" class="arrow-forward-button" aria-label="Next image">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward_ios
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="list-options hidden">
+    <button type="button" class="delete-button" data-id="<%=item.id%>" data-subject="<%=subject%>">
+      <span class="material-symbols-outlined">
+        delete
+      </span>
+    </button>
+  </div>
+</li>
