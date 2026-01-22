@@ -3,6 +3,11 @@ import { prisma } from "./clients.js";
 class Folder {
   async getAllFolders() {
     const folders = await prisma.folder.findMany({
+      orderBy: [
+        {
+          date: "desc",
+        },
+      ],
       include: {
         posts: true,
         shares: true,

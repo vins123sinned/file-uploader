@@ -13,11 +13,21 @@ h1 {
   gap: 2rem;
 }
 
+.overview a {
+  color: #0969da;
+}
+
+.overview a:hover {
+  text-decoration: underline;
+}
+
 .sidebar-left {
   flex: 3;
 }
 
-.post-li {
+.post-li,
+.folders-list,
+.announcement {
   position: relative;
   background-color: #fff;
   border-radius: 10px;
@@ -133,18 +143,18 @@ h1 {
   background-color: var(--secondary-background-color);
 }
 
-.see-all-link {
-  color: #0969da;
-}
-
-.see-all-link:hover {
-  text-decoration: underline;
-}
-
 .sidebar-right {
   flex: 1;
 }
 
 .user-status {
   color: #59636e;
+}
+
+.folders-list {
+  padding: 0.5rem 1rem;
+}
+
+.announcement {
+  padding: 0.25rem 1rem;
 }

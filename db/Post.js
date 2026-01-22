@@ -3,6 +3,11 @@ import { prisma } from "./clients.js";
 class Post {
   async getAllPosts() {
     const posts = await prisma.post.findMany({
+      orderBy: [
+        {
+          date: "desc",
+        },
+      ],
       include: {
         files: true,
       },

@@ -29,7 +29,7 @@
     <% } %>
     <section class="folders">
       <h2>Folders</h2>
-      <ul>
+      <ul class="folders-list">
         <% if (folders.length > 0) { %>
           <% folders.forEach((folder) => { %>
             <%- include("components/lists/folderLi.ejs", { item: folder, subject: "folders" }); %>
@@ -42,10 +42,12 @@
     </section>
     <section class="sidebar-announcement">
       <h2>Announcement</h2>
-      <p>Attention all foodies! Thank you for using Alimenté as the site to peruse all your favorite foods. For our 4th anniversary,
-        join us as we give out new prizes and explore the vast culinary landscape together. Thank you again and have a wonderful day!</p>
-      <img>
-      <div class="placeholder-image"></div>
+      <div class="announcement">
+        <p>Attention all foodies! Thank you for using Alimenté as the site to peruse all your favorite foods. For our 4th anniversary,
+          join us as we give out new prizes and explore the vast culinary landscape together. Thank you again and have a wonderful day!</p>
+        <img>
+        <div class="placeholder-image"></div>
+      </div>
     </section>
   </div>
 </div>
