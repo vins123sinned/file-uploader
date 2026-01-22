@@ -309,3 +309,11 @@ h2 {
   content: " · ";
   margin: 0 0.25rem;
 }
+
+.empty-list-para a {
+  color: #0969da;
+}
+
+.empty-list-para a:hover {
+  text-decoration: underline;
+}

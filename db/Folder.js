@@ -12,6 +12,23 @@ class Folder {
     return folders;
   }
 
+  async getFoldersWithLimit(limit) {
+    const folders = await prisma.folder.findMany({
+      orderBy: [
+        {
+          date: "desc",
+        },
+      ],
+      take: limit,
+      include: {
+        posts: true,
+        shares: true,
+      },
+    });
+
+    return folders;
+  }
+
   async getFolder(folderId) {
     const folder = await prisma.folder.findUnique({
       where: {

@@ -11,6 +11,22 @@ class Post {
     return posts;
   }
 
+  async getPostsWithLimit(limit) {
+    const posts = await prisma.post.findMany({
+      orderBy: [
+        {
+          date: "desc",
+        },
+      ],
+      take: limit,
+      include: {
+        files: true,
+      },
+    });
+
+    return posts;
+  }
+
   async getPost(postId) {
     const post = await prisma.post.findUnique({
       where: {

@@ -1,0 +1,150 @@
+main {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.overview {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar-left {
+  flex: 3;
+}
+
+.post-li {
+  position: relative;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.post-li:hover .images-options {
+  display: flex !important;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-title h2 {
+  margin: 0;
+}
+
+.post-title h2 a {
+  color: #0969da;
+}
+
+.post-title h2 a:hover {
+  text-decoration: underline;
+}
+
+.images-container {
+  max-width: 80%;
+  height: 25rem;
+  margin: 0 auto;
+}
+
+.images-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.images-options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 54%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+
+.images-options button {
+  background-color: var(--default-button-background);
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.images-options button:hover,
+.form-cancel-button:hover {
+  cursor: pointer;
+  background-color: var(--default-button-hover-background);
+}
+
+.images-options button:active,
+.form-cancel-button:active {
+  background-color: var(--default-button-background);
+}
+
+.images-options .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+
+.images-options .arrow-back {
+  margin-left: 0.15rem;
+  margin-top: 0.05rem;
+}
+
+.images-options .arrow-forward {
+  margin-top: 0.05rem;
+}
+
+.see-all-para {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.see-all-para::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #d1d9e0;
+  z-index: -1;
+}
+
+.see-all-link {
+  display: inline;
+  padding-inline: 0.5rem;
+  background-color: var(--secondary-background-color);
+}
+
+.see-all-link {
+  color: #0969da;
+}
+
+.see-all-link:hover {
+  text-decoration: underline;
+}
+
+.sidebar-right {
+  flex: 1;
+}
+
+.user-status {
+  color: #59636e;
+}

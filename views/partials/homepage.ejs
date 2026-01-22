@@ -3,38 +3,49 @@
 <% } else { %>
   <h1>Welcome back to Alimenté!</h1>
 <% } %>
-<section class="posts">
-  <h2>Recent Posts</h2>
-  <ul>
-    <% if (posts.length > 0) { %>
-      <% posts.forEach((post) => { %>
-        <%- include("components/lists/postLi.ejs", { item: post, subject: "posts" }); %>
-      <% }); %>
-      <%- include("components/lists/endLi.ejs"); %>
+<div class="overview">
+  <div class="sidebar-left">
+    <section class="posts">
+      <h2>Recent Post</h2>
+      <ul>
+        <% if (posts.length > 0) { %>
+          <% posts.forEach((post) => { %>
+            <%- include("components/lists/postLi.ejs", { item: post, subject: "posts" }); %>
+          <% }); %>
+          <p class="see-all-para">
+            <a class="see-all-link" href="/posts">See all posts</a>
+          </p>
+        <% } else { %>
+          <%- include("components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
+        <% } %>
+      </ul>
+    </section>
+  </div>
+  <div class="sidebar-right">
+    <% if (locals.currentUser) { %>
+      <p class="user-status">You are logged in. Thank you!</p>
     <% } else { %>
-      <%- include("components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
+      <p class="user-status">You aren't currently logged in.</a></p>
     <% } %>
-  </ul>
-</section>
-<div class="sidebar-right">
-  <section class="folders">
-    <h2>Folders</h2>
-    <ul>
-      <% if (folders.length > 0) { %>
-        <% folders.forEach((folder) => { %>
-          <%- include("components/lists/folderLi.ejs", { item: folder, subject: "folders" }); %>
-        <% }); %>
-        <%- include("components/lists/endLi.ejs"); %>
-      <% } else { %>
-        <%- include("components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
-      <% } %>
-    </ul>
-  </section>
-  <section class="sidebar-announcement">
-    <h2>Announcement</h2>
-    <p>Attention all foodies! Thank you for using Alimenté as the site to peruse all your favorite foods. For our 4th anniversary, 
-      join us as we give out new prizes and explore the vast culinary landscape together. Thank you again and have a wonderful day!</p>
-    <img>
-    <div class="placeholder-image"></div>
-  </section>
+    <section class="folders">
+      <h2>Folders</h2>
+      <ul>
+        <% if (folders.length > 0) { %>
+          <% folders.forEach((folder) => { %>
+            <%- include("components/lists/folderLi.ejs", { item: folder, subject: "folders" }); %>
+          <% }); %>
+          <%- include("components/lists/endLi.ejs"); %>
+        <% } else { %>
+          <%- include("components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
+        <% } %>
+      </ul>
+    </section>
+    <section class="sidebar-announcement">
+      <h2>Announcement</h2>
+      <p>Attention all foodies! Thank you for using Alimenté as the site to peruse all your favorite foods. For our 4th anniversary,
+        join us as we give out new prizes and explore the vast culinary landscape together. Thank you again and have a wonderful day!</p>
+      <img>
+      <div class="placeholder-image"></div>
+    </section>
+  </div>
 </div>
