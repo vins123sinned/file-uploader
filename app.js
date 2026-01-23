@@ -49,12 +49,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", indexRouter);
 app.use("/", authenticationRouter);
 app.use("/files", fileRouter);
 app.use("/folders", folderRouter);
 app.use("/posts", postRouter);
 app.use("/share", shareRouter);
+app.use("/", indexRouter);
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).render("layout", {
+    title: "error",
+    path: "partials/error.ejs",
+    error: err,
+  });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT || 3000, (err) => {

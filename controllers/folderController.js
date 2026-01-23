@@ -73,9 +73,10 @@ const getEditForm = async (req, res) => {
   const { folderId } = req.params;
   const folder = await folderDb.getFolder(folderId);
 
-  res.render("folderForm", {
+  res.render("layout", {
     title: "Update folder",
-    action: `/folders/update/${folderId}`,
+    path: "partials/folderForm.ejs",
+    action: `/folders/edit/${folderId}`,
     previousValues: {
       name: folder.name,
     },
@@ -91,7 +92,7 @@ const postEditForm = [
     if (!errors.isEmpty()) {
       return res.status(400).render("folderForm", {
         title: "Update folder",
-        action: `/folders/update/${folderId}`,
+        action: `/folders/edit/${folderId}`,
         previousValues: req.body,
         errors: errors.array(),
       });

@@ -1,0 +1,19 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+div {
+  text-align: center;
+}
+
+main a {
+  display: block;
+  color: #0969da;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
