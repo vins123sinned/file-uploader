@@ -1,6 +1,6 @@
 main {
   max-width: 75rem;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
 }
 
 h1 {
@@ -8,9 +8,16 @@ h1 {
   margin-top: 3rem;
 }
 
+h2 {
+  margin-top: 2rem;
+}
+
 .overview {
+  text-align: center;
   display: flex;
+  flex-direction: column;
   gap: 2rem;
+  margin: 0 1rem;
 }
 
 .overview a {
@@ -19,10 +26,6 @@ h1 {
 
 .overview a:hover {
   text-decoration: underline;
-}
-
-.sidebar-left {
-  flex: 3;
 }
 
 .post-li,
@@ -143,18 +146,80 @@ h1 {
   background-color: var(--secondary-background-color);
 }
 
-.sidebar-right {
-  flex: 1;
-}
-
 .user-status {
   color: #59636e;
 }
 
 .folders-list {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
 }
 
-.announcement {
-  padding: 0.25rem 1rem;
+.folders-list li:hover {
+  cursor: pointer;
+  background-color: var(--default-button-background);
+}
+
+.folders-list li,
+.folders-list a {
+  border-radius: 5px;
+}
+
+.folders-list a {
+  display: flex !important;
+  align-items: center;
+  color: #000;
+  height: 2.9rem;
+  padding: 0.5rem 0.5rem;
+}
+
+.folders-list a:hover {
+  text-decoration: none;
+  background-color: #f0f0f0;
+}
+
+.folders-list p {
+  margin: 0;
+}
+
+.see-all-folders .material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
+  font-size: 1.2rem;
+  background-color: #e2e5e9;
+  border-radius: 50%;
+  padding: 0.3rem;
+  margin-right: 0.5rem;
+}
+
+.sidebar-image {
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (min-width: 700px) {
+  main {
+    margin: 0 auto;
+  }
+
+  .overview {
+    text-align: start;
+    flex-direction: row;
+  }
+
+  .sidebar-left {
+    flex: 2;
+  }
+
+  .sidebar-right {
+    flex: 1;
+    min-height: 37.5rem;
+    max-height: 70vh;
+    overflow: scroll;
+  }
+
+  .sidebar-image {
+    display: block;
+    max-height: 30vh;
+    margin: 0 auto;
+  }
 }

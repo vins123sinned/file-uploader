@@ -7,18 +7,20 @@
   <div class="sidebar-left">
     <section class="posts">
       <h2>Recent Post</h2>
-      <ul>
-        <% if (posts.length > 0) { %>
+      <% if (posts.length > 0) { %>
+        <ul>
           <% posts.forEach((post) => { %>
             <%- include("components/lists/postLi.ejs", { item: post, subject: "posts" }); %>
           <% }); %>
-          <p class="see-all-para">
-            <a class="see-all-link" href="/posts">See all posts</a>
-          </p>
-        <% } else { %>
-          <%- include("components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
-        <% } %>
-      </ul>
+          <li>
+            <p class="see-all-para">
+              <a class="see-all-link" href="/posts">See all posts</a>
+            </p>
+          </li>
+        </ul>
+      <% } else { %>
+        <%- include("components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
+      <% } %>
     </section>
   </div>
   <div class="sidebar-right">
@@ -29,25 +31,27 @@
     <% } %>
     <section class="folders">
       <h2>Folders</h2>
-      <ul class="folders-list">
-        <% if (folders.length > 0) { %>
+      <% if (folders.length > 0) { %>
+        <ul class="folders-list">
           <% folders.forEach((folder) => { %>
-            <%- include("components/lists/folderLi.ejs", { item: folder, subject: "folders" }); %>
+            <li><a href="/folders/<%=folder.id%>"><%=folder.name%></a></li>
           <% }); %>
-          <%- include("components/lists/endLi.ejs"); %>
-        <% } else { %>
-          <%- include("components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
-        <% } %>
-      </ul>
+          <li>
+            <a class="see-all-folders" href="/posts">
+              <span class="material-symbols-outlined">
+                folder  
+              </span>
+              See all folders
+            </a>
+          </li>
+        </ul>
+      <% } else { %>
+        <%- include("components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
+      <% } %>
     </section>
-    <section class="sidebar-announcement">
-      <h2>Announcement</h2>
-      <div class="announcement">
-        <p>Attention all foodies! Thank you for using Alimenté as the site to peruse all your favorite foods. For our 4th anniversary,
-          join us as we give out new prizes and explore the vast culinary landscape together. Thank you again and have a wonderful day!</p>
-        <img>
-        <div class="placeholder-image"></div>
-      </div>
+    <section class="image-section">
+      <h2>Sidebar Image</h2>
+      <img class="sidebar-image" src="/images/announcement.png" width="300" alt="Image of an assortment of food from varied cuisines">
     </section>
   </div>
 </div>
