@@ -1,5 +1,22 @@
+import path from "node:path";
+import * as fs from "node:fs/promises";
+import mime from "mime/lite";
 import { prisma } from "./clients.js";
 import { supabase } from "./clients.js";
+import { decode } from "base64-arraybuffer";
+
+async function getImage(imageName) {
+  try {
+    const imagePath = path.join(
+      import.meta.dirname,
+      `/populatedbImages/${imageName}`,
+    );
+    const imageData = await fs.readFile(imagePath);
+    return imageData;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 async function insertFolder(name) {
   const folder = await prisma.folder.create({
@@ -11,9 +28,7 @@ async function insertFolder(name) {
   return folder;
 }
 
-async function insertPost(name, files, folderId) {
-  const fileIds = await uploadImages(files);
-  // add files
+async function insertPost(name, fileIds, folderId) {
   await prisma.post.create({
     data: {
       name: name,
@@ -25,16 +40,32 @@ async function insertPost(name, files, folderId) {
   });
 }
 
-async function uploadImages(imagesArray) {
+async function insertFile(size, url, filename) {
+  const file = await prisma.file.create({
+    data: {
+      size: size,
+      url: url,
+      name: filename,
+    },
+  });
+
+  return file;
+}
+
+async function uploadFiles(imagesArray) {
   const links = await Promise.all(
-    imagesArray.map(async (imagePath) => {
-      console.log(imagePath);
+    imagesArray.map(async (imageName) => {
+      const imageData = await getImage(imageName);
+      // decodes base64 string to ArrayBuffer for supabase .upload()
+      const fileBase64 = decode(imageData.toString("base64"));
       const filename = crypto.randomUUID();
 
       try {
         const { data, error } = await supabase.storage
           .from("image")
-          .upload(filename, imagePath);
+          .upload(filename, fileBase64, {
+            contentType: mime.getType(imageName),
+          });
 
         if (error) throw new Error("Error with uploading an image");
 
@@ -43,8 +74,8 @@ async function uploadImages(imagesArray) {
           .from("image")
           .getPublicUrl(filename);
 
-        const insertedFile = await fileDb.insertFile(
-          file.size,
+        const insertedFile = await insertFile(
+          Buffer.byteLength(imageData),
           image.publicUrl,
           filename,
         );
@@ -69,14 +100,17 @@ async function main() {
   const folderIds = [];
 
   console.log("seeding...");
-  /*
   await Promise.all(
     folders.map(async (name) => {
-      const folder = await insertFolder(name);
-      folderIds.push({
-        key: name,
-        value: folder.id,
-      });
+      try {
+        const folder = await insertFolder(name);
+        folderIds.push({
+          key: name,
+          value: folder.id,
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }),
   );
 
@@ -123,19 +157,24 @@ async function main() {
     },
     {
       name: "Heisenberg's Goods",
-      files: ["walt1.jpg", "walt2.jpg"],
+      files: ["walt1.jpeg", "walt2.jpeg"],
       folderId: folderIds.find((folder) => folder.key === "What the... 😳")
         .value,
     },
   ];
-  await Promise.all(posts.map((post) => {
-    insertPost
-  }));
-  */
+  await Promise.all(
+    posts.map(async (post) => {
+      try {
+        const fileIds = await uploadFiles(post.files);
 
-  console.log(URL.createObjectURL);
-  //await uploadImages(["./populateddbImages/bojangles1.png"]);
-  console.log(folders);
+        insertPost(post.name, fileIds, post.folderId);
+      } catch (err) {
+        console.error(err);
+      }
+    }),
+  );
+
+  console.log("Done!");
 }
 
 main();

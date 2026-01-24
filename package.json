@@ -20,7 +20,8 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "populatedb": "node db/populatedb.js"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
@@ -39,6 +40,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "mime": "^4.1.0",
     "prettier": "3.7.1",
     "prisma": "^6.19.0"
   }
