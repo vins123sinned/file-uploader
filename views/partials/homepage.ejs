@@ -10,7 +10,7 @@
       <% if (posts.length > 0) { %>
         <ul>
           <% posts.forEach((post) => { %>
-            <%- include("components/lists/postLi.ejs", { item: post, subject: "posts" }); %>
+            <%- include("./components/lists/postLi.ejs", { item: post, subject: "posts" }); %>
           <% }); %>
           <li>
             <p class="see-all-para">
@@ -19,7 +19,7 @@
           </li>
         </ul>
       <% } else { %>
-        <%- include("components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
+        <%- include("./components/lists/emptyListLi.ejs", { link: "/posts/create", subject: "posts" }); %>
       <% } %>
     </section>
   </div>
@@ -46,7 +46,7 @@
           </li>
         </ul>
       <% } else { %>
-        <%- include("components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
+        <%- include("./components/lists/emptyListLi.ejs", { link: "/folders/create", subject: "folders" }); %>
       <% } %>
     </section>
     <section class="image-section">

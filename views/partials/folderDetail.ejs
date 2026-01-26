@@ -13,13 +13,13 @@
   <ul>
     <% if (posts.length > 0) { %>
         <% posts.forEach((post) => { %>
-          <%- include("components/lists/postLi.ejs", { item: post, subject: "folders" }); %>
+          <%- include("./components/lists/postLi.ejs", { item: post, subject: "folders" }); %>
         <% }); %>
-        <%- include("components/lists/endLi.ejs"); %>
+        <%- include("./components/lists/endLi.ejs"); %>
     <% } else { %>
-      <%- include("components/lists/emptyListLi.ejs", { link: `/posts/create?folderId=${folder.id}`, subject: "folders" }); %>
+      <%- include("./components/lists/emptyListLi.ejs", { link: `/posts/create?folderId=${folder.id}`, subject: "folders" }); %>
     <% } %>
   </ul>
 </section>
-<%- include("components/forms/deleteForm.ejs", { subject: "posts" }); %>
+<%- include("./components/forms/deleteForm.ejs", { subject: "posts" }); %>
 <div class="overlay hidden"></div>

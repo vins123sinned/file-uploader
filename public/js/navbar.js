@@ -34,28 +34,3 @@ profilePicture.addEventListener("click", () => {
     userLinks.classList.add("hidden");
   }
 });
-
-async function getRandomFoodEmojis() {
-  const url = "https://api.emojisworld.fr/v1/random?categories=5&limit=5";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    const emojis = result.results;
-
-    for (const emoji of emojis) {
-      const span = document.createElement("span");
-      span.classList.add("emoji");
-      span.textContent = emoji.emoji;
-
-      foodEmojisList.appendChild(span);
-    }
-  } catch (err) {
-    console.error(err.message);
-  }
-}
-
-getRandomFoodEmojis();
