@@ -90,6 +90,14 @@ async function uploadFiles(imagesArray) {
   return links;
 }
 
+async function clearPreviousData() {
+  // NOTE: Doesn't delete supabase images!
+  await prisma.share.deleteMany({});
+  await prisma.file.deleteMany({});
+  await prisma.folder.deleteMany({});
+  await prisma.post.deleteMany({});
+}
+
 async function main() {
   const folders = [
     "Fast Food 🍔",
@@ -100,6 +108,7 @@ async function main() {
   const folderIds = [];
 
   console.log("seeding...");
+  await clearPreviousData();
   await Promise.all(
     folders.map(async (name) => {
       try {
