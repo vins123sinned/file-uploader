@@ -14,18 +14,18 @@
     <% if (items.length > 0) { %>
       <% items.forEach((item) => { %>
         <% if (subject === "posts") { %>
-          <%- include("./components/lists/postLi.ejs", { item: item, subject: subject }); %>
+          <%- include("components/lists/postLi.ejs", { item: item, subject: subject }); %>
         <% } else { %>
-          <%- include("./components/lists/folderLi.ejs",  { item: item, subject: subject }); %>
+          <%- include("components/lists/folderLi.ejs",  { item: item, subject: subject }); %>
         <% } %>
       <% }); %>
-      <%- include("./components/lists/endLi.ejs"); %>
+      <%- include("components/lists/endLi.ejs"); %>
     <% } else { %>
-      <%- include("./components/lists/emptyListLi.ejs", { link: `/${subject}/create`, subject: subject }); %>
+      <%- include("components/lists/emptyListLi.ejs", { link: `/${subject}/create`, subject: subject }); %>
     <% } %>
   </ul>
 </section>
-<%- include("./components/forms/deleteForm.ejs", { subject: subject }); %>
+<%- include("components/forms/deleteForm.ejs", { subject: subject }); %>
 <form action="<%= locals.action %>" method="POST" class="share-form <%= locals.errors ? "" : "hidden" %>">
   <h1>Share folder?</h1>
   <span class="error share-form-error" role="alert" aria-live="polite">
