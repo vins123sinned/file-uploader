@@ -13,6 +13,33 @@
 
 <details>
   <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#features">Features</a></li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#lessons-learned">Lessons Learned</a>
+      <ul>
+        <li><a href="#scope-creep">Scope Creep</a></li>
+        <li><a href="#project-planning">Project Planning</a></li>
+        <li><a href="#sunk-cost-fallacy">Sunk-Cost Fallacy</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
 </details>
 
 ## About the project
@@ -44,6 +71,20 @@ This project took me **way too long**, but it brought fruit to many great lesson
 ![Prettier](https://img.shields.io/badge/prettier-%23192a32?style=for-the-badge&logo=prettier&logoColor=dc524a)
 * Plus Passport.js!
 
+
+## Features
+
+- Prisma ORM to centralize the database and the codebase together as well as to simplify SQL queries
+- Use of Passport.js and its Local Strategy to store and keep track of user authentication
+- Prisma session store to store the user's session
+- Create, read, update, and delete (CRUD) posts and folders
+- Ability to link multiple files to a given post and display them
+- Ability to scroll through multiple images in a post
+- Ability to share folders with users who are not signed in, along with an expiration date for them
+- Routes to view posts, folder, and more
+- Custom error handling
+- Handle multipart encoded file data in Express and store them on the cloud through Supabase
+- And much more
 
 ## Getting Started
 
@@ -97,22 +138,50 @@ To get started building with this project, follow the steps below!
 Side note: if you're deploying this website, make sure to change your `DATABASE_URL` to the internal URL of your production postgres database! Also feel free to change your port by setting a `PORT` environment value in your `.env` file. Enjoy!
 
 ## Roadmap
-[x] Show folder relation in post(s)
-[x] Complete share view
-[x] Add custom error page
-[x] Fix `populatedb.js` script
-[x] Add date on folder detail and post list
-[ ] Refactor CSS and JS, as there were many duplicate functions used across the website
-[ ] Add post edit functionality
-[ ] Redirect users back to the page they intend to go (after initial redirect to log in page)
-[ ] Show all shares of a particular folder
-[ ] Add footer
-[ ] Handle routes to `/share/installHook.js` and `favicon.ico`
-[ ] Optimize code
+- [x] Show folder relation in post(s)
+- [x] Complete share view
+- [x] Add custom error page
+- [x] Fix `populatedb.js` script
+- [x] Add date on folder detail and post list
+- [ ] Refactor CSS and JS, as there were many duplicate functions used across the website
+- [ ] Add post edit functionality
+- [ ] Redirect users back to the page they intend to go (after initial redirect to log in page)
+- [ ] Show all shares of a particular folder
+- [ ] Add footer
+- [ ] Handle routes to `/share/installHook.js` and `favicon.ico`
+- [ ] Optimize code
 
+## Lessons Learned
 
+This project was a genuine waste of time. After all, there was no reason for this simple learning project to take almost 4 whole months (that's an entire quarter of an year!) to complete. I don't regret completing this project or any of the process that went into completing it, but a culmination of bad choices led the project to take longer than I ever thought possible.
 
-## Acknowledgements
+While it pains me to think upon the precious and valuable time that has drained, there were many important lessons that I learned from the completion of my file uploader website. In this section, I'll narrow it to the three most important lessons that I've come up with after some brief reflections. The main point of these three ties to how they all led to me wasting time upon time on what was supposed to be a "learning project."
+
+### Scope Creep
+
+By far the largest culprit in the time sink is the topic of scope creep. I've actually given some thoughts to this topic in previous projects, but I never thought it would hit as hard as it did right now. Here's the thing: this project was a **file uploader** project, not some pseudo social media site that I ended up with. The goals of this project was to simply learn about Prisma ORM and handling files in JavaScript but I took it one notch further. No harm done right? After all, I would be learning extra this way! Wrong.
+
+The curriculum that I'm following for web development, The Odin Project, was carefully curated to make the projects manageable and easy to digest. In my arrogance, I decided that I was better than that and implemented more features than necessary. This ended up as you'd expect, with my project's time of completion ballooning an extra few months. This would've been all fine and dandy except for the fact that I do not have all the time in the world to spend on this project. In combination with my personal life and a sprinkle of procrastination, I've wasted valuable time thinking I'm learning faster but actually hindering my progress.
+
+That is to say in conclusion, I should've humbled myself and realize that the project was outlined that way for a reason. I've been able to get away with adding extra features for my smaller projects, but with something as complex as the file uploader I'm working on, each feature would naturally much longer. In the future, I'll keep this mistake fresh in my mind and strive to go against scope creep in order to finish my project in time. After all, I didn't even bust out React with the website which would've made it so much cooler.
+
+### Project Planning
+
+So how might I prevent scope creep you ask? The answer is simple: project planning. But wait a minute, didn't I already say that in my previous few projects? The answer? Well, yes. But I only did it in the beginning and half-heartedly so. I knew all along from many master programmers that planning then dividing and conquering is the way to go. However, when I actually implemented it I just only focused on the beginning parts of the project and a simple design of the completed websites. What about the rest? What about dividing and conquering? In the end, I thought I could fill in the rest by myself, so I decided to forego any extra planning.
+
+Big mistake. As time went on, I eventually forgot the things I did as well as the things I was supposed to do. Without dividing and conquering my project into chunks and working on them one piece at a time, I was forced to confront the whole piece and juggle many functionalities at the same time. This inevitably led to many bugs and less foundationally sound code which went and bit me in the future. Towards the end, I couldn't even keep track of my project anymore and my code was starting crumble into pieces. It was not a good time for me at all and was the second biggest contributor to my project being bloated and a time sink. Worst part? It all could've been solved had I actually spent some time project planning.
+
+### Sunk-Cost Fallacy
+
+So with all these extra features and stuff that I knew too late were just going to hinder me what should I have done? Looking back on it, I should've cut out all of those extra features when I had the time to. Did I mention that I had multiple of those "times" to scale back when I knew how much work those features would take? Well, even then I decided that it wasn't worth scaling back despite the fact that it would've save me much more time than if I kept going.
+
+Despite that it was the right thing to do, that I knew early on the dangers I was getting myself into, and the fact that I had multiple chances to scale back, I didn't. The pain of all my time wasted on the feature going down the drain overcame the clear benefits of scaling back and saving me more time than I wasted. In the end these repeated instances of sunk-cost fallacy kept me on the road to wasting time, leading to the project we have today. The lesson here is simple: do not fall for sunk-cost fallacy if I can. I can also make it much easier for me by focusing on a minimum viable product (MVP) and finishing it before adding any extra features or polish.
+
+### Conclusion
+
+Those were the three main lessons that I'll keep in mind for eternity. I *would* say the foreseeable futures, but these lessons are genuinely much more than that. I regret the time I could've saved, but I don't regret the lessons here today. As they say, experience is the best teacher. I've learned more here through my failures rather than my successes and I'm all the more grateful for that. With these new knowledge and expertise I've gained, I'll move onto the next project. And the next. And the next... See y'all!
+
+## Acknowledgments
 Thank you to all the programmers out there! Without y'all, this project probably won't be as great. This section is dedicated to thanking the resources that helped make this project possible and I hope that they'll keep me company as I grow and get better. Thanks again and without further ado, here are some resources that I would like to shout out.
 
 * [The Odin Project](https://www.theodinproject.com/dashboard) - The curriculum that I am taking for web development and the source of all my knowledge. Without it, I wouldn't know where to start and would've been stuck in tutorial hell.
